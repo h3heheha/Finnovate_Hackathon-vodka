@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  FraudLens: ONE Android app. The "FraudLens" tab shows the full app (served by the FraudLens server),
+  the "Shield" tab sets up background protection (notification listener + call screening in this APK).
+  This folder is a complete Android Studio project: File -> Open -> shield/.
+  Deliberately minimal permissions: no READ_SMS, RECEIVE_SMS, READ_PHONE_STATE or READ_CALL_LOG.
+  applicationId stays com.fraudlens.shield so it installs over the earlier Shield build and keeps its permissions.
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Talk to the FraudLens server on the laptop (API + the app's screens) -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Show the warning notification (Android 13+ asks the user) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Red banner on top of WhatsApp / Messages (user switches it on in Settings) -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <!-- usesCleartextTraffic: the demo API runs on plain http://<laptop-IP>:8000 on the laptop -->
+    <application
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:label="FraudLens"
+        android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@android:style/Theme.Material.NoActionBar">
+
+        <!-- The app: "FraudLens" tab (full app) + "Shield" tab (background protection setup) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustResize"
+            android:configChanges="orientation|screenSize|screenLayout|smallestScreenSize|keyboardHidden|uiMode">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- "See why" Scam X-Ray screen -->
+        <activity
+            android:name=".DetailActivity"
+            android:exported="false"
+            android:taskAffinity=""
+            android:excludeFromRecents="true" />
+
+        <!-- Woken by Android only when a notification arrives (SMS, WhatsApp, email) -->
+        <service
+            android:name=".ShieldNotificationListener"
+            android:exported="true"
+            android:label="FraudLens"
+            android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.notification.NotificationListenerService" />
+            </intent-filter>
+        </service>
+
+        <!-- Woken by Android only while a call is ringing (Android 10+, "Caller ID & spam" role) -->
+        <service
+            android:name=".ShieldCallScreeningService"
+            android:exported="true"
+            android:permission="android.permission.BIND_SCREENING_SERVICE">
+            <intent-filter>
+                <action android:name="android.telecom.CallScreeningService" />
+            </intent-filter>
+        </service>
+    </application>
+</manifest>

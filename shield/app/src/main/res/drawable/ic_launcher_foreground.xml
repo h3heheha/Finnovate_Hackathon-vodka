@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Emerald shield on dark slate, matching the app's design (mobile/DESIGN_SPEC.md). -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp" android:height="108dp"
+    android:viewportWidth="108" android:viewportHeight="108">
+    <path android:fillColor="#10B981"
+        android:pathData="M54,28 L76,36 L76,52 C76,66 66.5,77.5 54,81 C41.5,77.5 32,66 32,52 L32,36 Z"/>
+    <path android:fillColor="#121417"
+        android:pathData="M49,62.5 L41.5,55 L45,51.5 L49,55.5 L62.5,42 L66,45.5 Z"/>
+</vector>
