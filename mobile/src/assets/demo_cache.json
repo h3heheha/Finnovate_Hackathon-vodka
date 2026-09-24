@@ -1,0 +1,3401 @@
+{
+ "samples": [
+  {
+   "id": "fake_bank",
+   "title": "Fake bank alert",
+   "channel": "sms",
+   "sender": "+230 5821 4470",
+   "expected": "scam",
+   "text": "MCB ALERT: Your account has been temporarily suspended due to unusual activity. Verify your identity within 2 hours to avoid permanent closure: http://mcb-secure-verify.com/login Reply with the OTP you receive to confirm. Do not discuss this with anyone for security reasons.",
+   "category": "bank_impersonation"
+  },
+  {
+   "id": "parcel_fee",
+   "title": "Parcel release fee",
+   "channel": "sms",
+   "sender": "MU-POST",
+   "expected": "scam",
+   "text": "Mauritius Post: Your parcel MU2849 is held at customs. Pay the Rs 95 release fee today or it will be returned to sender: https://bit.ly/mupost-fee",
+   "category": "parcel_fee"
+  },
+  {
+   "id": "hi_mum",
+   "title": "\"Hi Mum\" new number",
+   "channel": "whatsapp",
+   "sender": "+230 5934 1182",
+   "expected": "scam",
+   "text": "Hi Mum, it's me. I dropped my phone in the water so this is my new number. I need to pay a bill urgently today, can you transfer Rs 18,500 to this account 000451239876 (MCB)? I'll pay you back tomorrow. Please don't tell Dad yet 🙏",
+   "category": "family_emergency"
+  },
+  {
+   "id": "crypto",
+   "title": "Crypto investment offer",
+   "channel": "whatsapp",
+   "sender": "+44 7700 900123",
+   "expected": "scam",
+   "text": "Congratulations! You have been selected for our VIP crypto trading group. Guaranteed returns of 30% per week, zero risk. Start with only Rs 5,000 — send USDT to wallet TXk4n2bQpR7sLm9VwZ3yH8cD5fJ1gA6eNq. Limited slots, offer ends tonight!",
+   "category": "investment"
+  },
+  {
+   "id": "french_bank",
+   "title": "Français : compte bloqué",
+   "channel": "sms",
+   "sender": "SBM-INFO",
+   "expected": "scam",
+   "text": "Cher client, votre compte SBM sera bloqué aujourd'hui. Veuillez confirmer vos coordonnées bancaires et votre code OTP ici : sbm-mu.info/confirm",
+   "category": "bank_impersonation"
+  },
+  {
+   "id": "kreol_prize",
+   "title": "Kreol: fake lottery win",
+   "channel": "sms",
+   "sender": "+230 5710 2299",
+   "expected": "scam",
+   "text": "Bonzour! Ou finn gagne Rs 50,000 dan tiraz MCB. Avoy Rs 1,500 vit vit pou resevwar ou kas. Pa dir personn.",
+   "category": "prize"
+  },
+  {
+   "id": "legit_otp",
+   "title": "Genuine OTP message",
+   "channel": "sms",
+   "sender": "MCB",
+   "expected": "legit",
+   "text": "MCB: Your OTP for the online payment of Rs 1,250.00 at DARTY is 482913. Never share this code with anyone, including MCB staff.",
+   "category": "none"
+  },
+  {
+   "id": "legit_friend",
+   "title": "Normal chat message",
+   "channel": "whatsapp",
+   "sender": "Priya",
+   "expected": "legit",
+   "text": "Hey! Still on for dinner on Saturday at 7? I booked a table at the usual place. I'll bring the photos from the trip.",
+   "category": "none"
+  }
+ ],
+ "analyses": {
+  "MCB ALERT: Your account has been temporarily suspended due to unusual activity. Verify your identity within 2 hours to avoid permanent closure: http://mcb-secure-verify.com/login Reply with the OTP you receive to confirm. Do not discuss this with anyone for security reasons.": {
+   "analysis_id": "offline-fake_bank",
+   "created_at": "2026-09-23T21:38:33.030554+00:00",
+   "risk_score": 100,
+   "risk_level": "high",
+   "verdict": "Likely scam: do not pay or reply",
+   "summary": "It matches a known scam (investment / crypto scam) (96% similar). This message shows 7 warning signs typical of a investment / crypto scam: asks for codes or passwords, suspicious link, threats or fear and sender doesn't match who it claims to be.",
+   "category": "investment",
+   "category_label": "Investment / crypto scam",
+   "language": "en",
+   "tactics": [
+    {
+     "tactic": "credential_request",
+     "label": "Asks for codes or passwords",
+     "short": "OTP / PIN",
+     "description": "Requests for your OTP, PIN, password or card details are the strongest scam signal.",
+     "color": "#DC2626",
+     "icon": "PASSWORD",
+     "weight": 0.65,
+     "contribution": 6,
+     "evidence": [
+      "Verify your identity",
+      "Reply with the OTP",
+      "the OTP you receive"
+     ],
+     "details": [
+      "Asking you to 'verify your account' is how phishing pages collect logins."
+     ]
+    },
+    {
+     "tactic": "suspicious_link",
+     "label": "Suspicious link",
+     "short": "Link",
+     "description": "The link hides its real destination or imitates an official website.",
+     "color": "#0EA5E9",
+     "icon": "LINK_OFF",
+     "weight": 0.6,
+     "contribution": 5,
+     "evidence": [
+      "http://mcb-secure-verify.com/login"
+     ],
+     "details": [
+      "Uses the name 'MCB' but is not the official site (mcb.mu)."
+     ]
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "short": "Threat",
+     "description": "Warnings about blocked accounts, fines or police are used to frighten you into acting.",
+     "color": "#EF4444",
+     "icon": "WARNING_AMBER",
+     "weight": 0.4,
+     "contribution": 4,
+     "evidence": [
+      "account has been temporarily suspended",
+      "unusual activity",
+      "permanent closure"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "sender_mismatch",
+     "label": "Sender doesn't match who it claims to be",
+     "short": "Wrong sender",
+     "description": "The message claims to come from an organisation but was sent from a personal phone number.",
+     "color": "#9333EA",
+     "icon": "PHONELINK_ERASE",
+     "weight": 0.45,
+     "contribution": 4,
+     "evidence": [
+      "+230 5821 4470"
+     ],
+     "details": [
+      "Claims to be MCB (Mauritius Commercial Bank) but was sent from a personal phone number (+230 5821 4470)."
+     ]
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "short": "Authority",
+     "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+     "color": "#6366F1",
+     "icon": "ACCOUNT_BALANCE",
+     "weight": 0.2,
+     "contribution": 3,
+     "evidence": [
+      "MCB"
+     ],
+     "details": [
+      "Mentions MCB (Mauritius Commercial Bank) to look trustworthy."
+     ]
+    },
+    {
+     "tactic": "secrecy",
+     "label": "Asks you to keep it secret",
+     "short": "Secrecy",
+     "description": "Scammers isolate you from people who could spot the scam.",
+     "color": "#A855F7",
+     "icon": "VISIBILITY_OFF",
+     "weight": 0.35,
+     "contribution": 3,
+     "evidence": [
+      "Do not discuss this with anyone"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "short": "Urgency",
+     "description": "Scammers rush you so you don't stop to think or check with someone.",
+     "color": "#F59E0B",
+     "icon": "TIMER",
+     "weight": 0.25,
+     "contribution": 2,
+     "evidence": [
+      "within 2 hours"
+     ],
+     "details": []
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "MCB",
+     "start": 0,
+     "end": 3,
+     "weight": 0.2,
+     "detail": "Mentions MCB (Mauritius Commercial Bank) to look trustworthy.",
+     "source": "rule"
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "evidence": "account has been temporarily suspended",
+     "start": 16,
+     "end": 54,
+     "weight": 0.3,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "evidence": "unusual activity",
+     "start": 62,
+     "end": 78,
+     "weight": 0.2,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "credential_request",
+     "label": "Asks for codes or passwords",
+     "evidence": "Verify your identity",
+     "start": 80,
+     "end": 100,
+     "weight": 0.3,
+     "detail": "Asking you to 'verify your account' is how phishing pages collect logins.",
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "within 2 hours",
+     "start": 101,
+     "end": 115,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "evidence": "permanent closure",
+     "start": 125,
+     "end": 142,
+     "weight": 0.3,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "suspicious_link",
+     "label": "Suspicious link",
+     "evidence": "http://mcb-secure-verify.com/login",
+     "start": 144,
+     "end": 178,
+     "weight": 0.6,
+     "detail": "Uses the name 'MCB' but is not the official site (mcb.mu).",
+     "source": "rule"
+    },
+    {
+     "tactic": "credential_request",
+     "label": "Asks for codes or passwords",
+     "evidence": "Reply with the OTP",
+     "start": 179,
+     "end": 197,
+     "weight": 0.55,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "credential_request",
+     "label": "Asks for codes or passwords",
+     "evidence": "the OTP you receive",
+     "start": 190,
+     "end": 209,
+     "weight": 0.55,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "secrecy",
+     "label": "Asks you to keep it secret",
+     "evidence": "Do not discuss this with anyone",
+     "start": 222,
+     "end": 253,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "sender_mismatch",
+     "label": "Sender doesn't match who it claims to be",
+     "evidence": "+230 5821 4470",
+     "start": null,
+     "end": null,
+     "weight": 0.45,
+     "detail": "Claims to be MCB (Mauritius Commercial Bank) but was sent from a personal phone number (+230 5821 4470).",
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "MCB",
+     "tactic": "authority"
+    },
+    {
+     "text": " ALERT: Your ",
+     "tactic": null
+    },
+    {
+     "text": "account has been temporarily suspended",
+     "tactic": "threat"
+    },
+    {
+     "text": " due to ",
+     "tactic": null
+    },
+    {
+     "text": "unusual activity",
+     "tactic": "threat"
+    },
+    {
+     "text": ". ",
+     "tactic": null
+    },
+    {
+     "text": "Verify your identity",
+     "tactic": "credential_request"
+    },
+    {
+     "text": " ",
+     "tactic": null
+    },
+    {
+     "text": "within 2 hours",
+     "tactic": "urgency"
+    },
+    {
+     "text": " to avoid ",
+     "tactic": null
+    },
+    {
+     "text": "permanent closure",
+     "tactic": "threat"
+    },
+    {
+     "text": ": ",
+     "tactic": null
+    },
+    {
+     "text": "http://mcb-secure-verify.com/login",
+     "tactic": "suspicious_link"
+    },
+    {
+     "text": " ",
+     "tactic": null
+    },
+    {
+     "text": "Reply with the OTP you receive",
+     "tactic": "credential_request"
+    },
+    {
+     "text": " to confirm. ",
+     "tactic": null
+    },
+    {
+     "text": "Do not discuss this with anyone",
+     "tactic": "secrecy"
+    },
+    {
+     "text": " for security reasons.",
+     "tactic": null
+    }
+   ],
+   "advice": [
+    {
+     "id": "known_scam",
+     "title": "This is a known scam",
+     "detail": "FraudLens has seen this scam before. Don't reply, pay or click. Delete it and block the sender.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "no_codes",
+     "title": "Never share your OTP, PIN or password",
+     "detail": "No bank, courier or government office will ever ask for them by message or phone.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "no_link",
+     "title": "Don't tap the link",
+     "detail": "Uses the name 'MCB' but is not the official site (mcb.mu). Open your official app instead.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "call_mcb",
+     "title": "Contact MCB directly",
+     "detail": "Don't use any number from this message. Use the number on the back of your card or on https://www.mcb.mu.",
+     "action": "call_official",
+     "payload": {
+      "org_id": "mcb",
+      "website": "https://www.mcb.mu",
+      "phone": null
+     }
+    },
+    {
+     "id": "check_fsc",
+     "title": "Check the company is licensed",
+     "detail": "Look it up on the Financial Services Commission website before investing anything.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://www.fscmauritius.org"
+     }
+    },
+    {
+     "id": "tell_someone",
+     "title": "Tell someone you trust",
+     "detail": "Scammers ask for secrecy because a second opinion stops scams.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "report",
+     "title": "Report and block the sender",
+     "detail": "Report it on MAUCORS (Mauritian Cybercrime Online Reporting System) and block the number so it can't target others.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://maucors.govmu.org"
+     }
+    }
+   ],
+   "verification_reply": "Please send your FSC licence number. I will check it on the FSC website before I invest anything.",
+   "score_breakdown": [
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 38,
+     "detail": "Wording is 94% scam-like"
+    },
+    {
+     "source": "memory",
+     "label": "Scam memory",
+     "points": 35,
+     "detail": "96% similar to a known scam (investment / crypto scam)"
+    },
+    {
+     "source": "rules",
+     "label": "Warning-sign rules",
+     "points": 27,
+     "detail": "7 warning sign(s) found by the rule engine"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.9446818232536316,
+    "similar": [
+     {
+      "id": "train-4276",
+      "label": "scam",
+      "similarity": 0.956,
+      "category": "investment",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1665692,
+      "preview": "URGENT: Your MCB account has been flagged for unusual activity. Verify your details & OTP code immediately at secure-mcb-verify.site or call",
+      "strength": 1.0,
+      "category_label": "Investment / crypto scam"
+     },
+     {
+      "id": "train-0",
+      "label": "scam",
+      "similarity": 0.952,
+      "category": "bank_impersonation",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1648526,
+      "preview": "MCB: Unusual login detected on your Internet Banking. Confirm your details within 24h to avoid suspension: https://mcb-login-secure.net",
+      "strength": 1.0,
+      "category_label": "Fake bank or official message"
+     },
+     {
+      "id": "train-4264",
+      "label": "scam",
+      "similarity": 0.95,
+      "category": "job",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1665454,
+      "preview": "URGENT: Your MCB account has been temporarily blocked due to suspicious activity. Verify your details and a one-time pin by replying 'VERIFY",
+      "strength": 1.0,
+      "category_label": "Job or task scam"
+     }
+    ],
+    "memory_match": {
+     "id": "train-4276",
+     "label": "scam",
+     "similarity": 0.956,
+     "category": "investment",
+     "source": "training",
+     "reports": 1,
+     "created_at": 1790183288.1665692,
+     "preview": "URGENT: Your MCB account has been flagged for unusual activity. Verify your details & OTP code immediately at secure-mcb-verify.site or call",
+     "category_label": "Investment / crypto scam"
+    },
+    "links": [
+     {
+      "url": "http://mcb-secure-verify.com/login",
+      "phishing_probability": 1.0
+     }
+    ],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.99,
+     "classifier": 0.945,
+     "memory": 1.0,
+     "genuine": 0.677,
+     "url": 1.0,
+     "community": 0.0
+    },
+    "notes": [
+     "Parts of this message look like genuine messages, which lowered the score."
+    ]
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [
+     "http://mcb-secure-verify.com/login"
+    ],
+    "domains": [
+     "mcb-secure-verify.com"
+    ],
+    "phone_numbers": [
+     "+230 5821 4470"
+    ],
+    "accounts": [],
+    "wallets": [],
+    "amounts": [],
+    "brands": [
+     "mcb"
+    ],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 0,
+    "redacted_types": {},
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 105,
+    "rules_fired": 11,
+    "rules_score": 99,
+    "combos": [
+     "Pretends to be an organisation AND asks for your codes.",
+     "Threatens you AND pushes a link."
+    ],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  },
+  "Mauritius Post: Your parcel MU2849 is held at customs. Pay the Rs 95 release fee today or it will be returned to sender: https://bit.ly/mupost-fee": {
+   "analysis_id": "offline-parcel_fee",
+   "created_at": "2026-09-23T21:38:33.083339+00:00",
+   "risk_score": 100,
+   "risk_level": "high",
+   "verdict": "Likely scam: do not pay or reply",
+   "summary": "This message shows 5 warning signs typical of a fake delivery / customs fee: suspicious link, asks you to send money, pressure to act fast and threats or fear. Our AI language model also finds the wording typical of scams (86%).",
+   "category": "parcel_fee",
+   "category_label": "Fake delivery / customs fee",
+   "language": "en",
+   "tactics": [
+    {
+     "tactic": "suspicious_link",
+     "label": "Suspicious link",
+     "short": "Link",
+     "description": "The link hides its real destination or imitates an official website.",
+     "color": "#0EA5E9",
+     "icon": "LINK_OFF",
+     "weight": 0.35,
+     "contribution": 9,
+     "evidence": [
+      "https://bit.ly/mupost-fee"
+     ],
+     "details": [
+      "Shortened link: you can't see where it really goes."
+     ]
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "short": "Payment",
+     "description": "The message asks for a payment, fee or transfer.",
+     "color": "#F97316",
+     "icon": "PAYMENTS",
+     "weight": 0.3,
+     "contribution": 7,
+     "evidence": [
+      "Pay the Rs",
+      "release fee"
+     ],
+     "details": [
+      "Small 'fees' are a common hook: once you pay one, more follow."
+     ]
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "short": "Urgency",
+     "description": "Scammers rush you so you don't stop to think or check with someone.",
+     "color": "#F59E0B",
+     "icon": "TIMER",
+     "weight": 0.25,
+     "contribution": 6,
+     "evidence": [
+      "Pay the Rs 95 release fee today"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "short": "Threat",
+     "description": "Warnings about blocked accounts, fines or police are used to frighten you into acting.",
+     "color": "#EF4444",
+     "icon": "WARNING_AMBER",
+     "weight": 0.2,
+     "contribution": 6,
+     "evidence": [
+      "returned to sender"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "short": "Authority",
+     "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+     "color": "#6366F1",
+     "icon": "ACCOUNT_BALANCE",
+     "weight": 0.25,
+     "contribution": 4,
+     "evidence": [
+      "Mauritius Post",
+      "customs"
+     ],
+     "details": [
+      "Mentions Mauritius Post to look trustworthy."
+     ]
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "Mauritius Post",
+     "start": 0,
+     "end": 14,
+     "weight": 0.2,
+     "detail": "Mentions Mauritius Post to look trustworthy.",
+     "source": "rule"
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "customs",
+     "start": 46,
+     "end": 53,
+     "weight": 0.2,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "evidence": "Pay the Rs",
+     "start": 55,
+     "end": 65,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "Pay the Rs 95 release fee today",
+     "start": 55,
+     "end": 86,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "evidence": "release fee",
+     "start": 69,
+     "end": 80,
+     "weight": 0.25,
+     "detail": "Small 'fees' are a common hook: once you pay one, more follow.",
+     "source": "rule"
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "evidence": "returned to sender",
+     "start": 101,
+     "end": 119,
+     "weight": 0.2,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "suspicious_link",
+     "label": "Suspicious link",
+     "evidence": "https://bit.ly/mupost-fee",
+     "start": 121,
+     "end": 146,
+     "weight": 0.35,
+     "detail": "Shortened link: you can't see where it really goes.",
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "Mauritius Post",
+     "tactic": "authority"
+    },
+    {
+     "text": ": Your parcel MU2849 is held at ",
+     "tactic": null
+    },
+    {
+     "text": "customs",
+     "tactic": "authority"
+    },
+    {
+     "text": ". ",
+     "tactic": null
+    },
+    {
+     "text": "Pay the Rs",
+     "tactic": "payment_request"
+    },
+    {
+     "text": " 95 ",
+     "tactic": "urgency"
+    },
+    {
+     "text": "release fee",
+     "tactic": "payment_request"
+    },
+    {
+     "text": " today",
+     "tactic": "urgency"
+    },
+    {
+     "text": " or it will be ",
+     "tactic": null
+    },
+    {
+     "text": "returned to sender",
+     "tactic": "threat"
+    },
+    {
+     "text": ": ",
+     "tactic": null
+    },
+    {
+     "text": "https://bit.ly/mupost-fee",
+     "tactic": "suspicious_link"
+    }
+   ],
+   "advice": [
+    {
+     "id": "no_link",
+     "title": "Don't tap the link",
+     "detail": "Shortened link: you can't see where it really goes. Open your official app instead.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "call_mupost",
+     "title": "Contact Mauritius Post directly",
+     "detail": "Don't use any number from this message. Use the number on the back of your card or on https://www.mauritiuspost.mu.",
+     "action": "call_official",
+     "payload": {
+      "org_id": "mupost",
+      "website": "https://www.mauritiuspost.mu",
+      "phone": null
+     }
+    },
+    {
+     "id": "pause_payment",
+     "title": "Don't send money yet",
+     "detail": "Check the request on a number you already trust, or ask someone you trust, before paying anything.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "report",
+     "title": "Report and block the sender",
+     "detail": "Report it on MAUCORS (Mauritian Cybercrime Online Reporting System) and block the number so it can't target others.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://maucors.govmu.org"
+     }
+    }
+   ],
+   "verification_reply": "I don't act on payment or security requests by message. I will contact the organisation directly using the official number I already have.",
+   "score_breakdown": [
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 45,
+     "detail": "Wording is 86% scam-like"
+    },
+    {
+     "source": "rules",
+     "label": "Warning-sign rules",
+     "points": 32,
+     "detail": "5 warning sign(s) found by the rule engine"
+    },
+    {
+     "source": "memory",
+     "label": "Scam memory",
+     "points": 23,
+     "detail": "89% similar to a known scam (fake delivery / customs fee)"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.8554106950759888,
+    "similar": [
+     {
+      "id": "train-8",
+      "label": "scam",
+      "similarity": 0.893,
+      "category": "parcel_fee",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1648955,
+      "preview": "Mauritius Post: we tried to deliver your package but the address was incomplete. Pay Rs 45 redelivery fee: https://tinyurl.com/mupost-redeli",
+      "strength": 0.57,
+      "category_label": "Fake delivery / customs fee"
+     },
+     {
+      "id": "train-32",
+      "label": "scam",
+      "similarity": 0.888,
+      "category": "parcel_fee",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1649582,
+      "preview": "La Poste: votre colis est en attente. Des frais de livraison de Rs 60 sont à régler aujourd'hui : https://bit.ly/colis-mu",
+      "strength": 0.5,
+      "category_label": "Fake delivery / customs fee"
+     },
+     {
+      "id": "train-9",
+      "label": "scam",
+      "similarity": 0.884,
+      "category": "parcel_fee",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1648986,
+      "preview": "DHL: Your shipment is on hold at customs. A clearance fee of Rs 1,250 must be paid today or it will be returned. Pay here: dhl-customs-pay.c",
+      "strength": 0.44,
+      "category_label": "Fake delivery / customs fee"
+     }
+    ],
+    "memory_match": null,
+    "links": [
+     {
+      "url": "https://bit.ly/mupost-fee",
+      "phishing_probability": 0.997
+     }
+    ],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.87,
+     "classifier": 0.855,
+     "memory": 0.567,
+     "genuine": 0.348,
+     "url": 0.997,
+     "community": 0.0
+    },
+    "notes": []
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [
+     "https://bit.ly/mupost-fee"
+    ],
+    "domains": [
+     "bit.ly"
+    ],
+    "phone_numbers": [],
+    "accounts": [],
+    "wallets": [],
+    "amounts": [
+     "Rs 95"
+    ],
+    "brands": [
+     "mupost"
+    ],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 0,
+    "redacted_types": {},
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 52,
+    "rules_fired": 7,
+    "rules_score": 87,
+    "combos": [
+     "Rushes you AND asks for money.",
+     "Threatens you AND pushes a link."
+    ],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  },
+  "Hi Mum, it's me. I dropped my phone in the water so this is my new number. I need to pay a bill urgently today, can you transfer Rs 18,500 to this account 000451239876 (MCB)? I'll pay you back tomorrow. Please don't tell Dad yet 🙏": {
+   "analysis_id": "offline-hi_mum",
+   "created_at": "2026-09-23T21:38:33.129969+00:00",
+   "risk_score": 100,
+   "risk_level": "high",
+   "verdict": "Likely scam: do not pay or reply",
+   "summary": "This message shows 6 warning signs typical of a family or friend impersonation: pretends to be someone you know, asks you to send money, new or changed bank details and asks you to keep it secret.",
+   "category": "family_emergency",
+   "category_label": "Family or friend impersonation",
+   "language": "en",
+   "tactics": [
+    {
+     "tactic": "impersonation_personal",
+     "label": "Pretends to be someone you know",
+     "short": "Impersonation",
+     "description": "'Hi Mum, this is my new number' is a common way to borrow the trust of a loved one.",
+     "color": "#DB2777",
+     "icon": "PERSON_SEARCH",
+     "weight": 0.5,
+     "contribution": 7,
+     "evidence": [
+      "Hi Mum",
+      "it's me",
+      "dropped my phone",
+      "this is my new number"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "short": "Payment",
+     "description": "The message asks for a payment, fee or transfer.",
+     "color": "#F97316",
+     "icon": "PAYMENTS",
+     "weight": 0.3,
+     "contribution": 7,
+     "evidence": [
+      "can you transfer",
+      "transfer Rs"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "payment_redirection",
+     "label": "New or changed bank details",
+     "short": "New account",
+     "description": "Being told to pay a new or different account is how invoice and family scams steal money.",
+     "color": "#E11D48",
+     "icon": "SWAP_HORIZ",
+     "weight": 0.5,
+     "contribution": 7,
+     "evidence": [
+      "to this account",
+      "000451239876"
+     ],
+     "details": [
+      "An account number sent by message: verify it before paying."
+     ]
+    },
+    {
+     "tactic": "secrecy",
+     "label": "Asks you to keep it secret",
+     "short": "Secrecy",
+     "description": "Scammers isolate you from people who could spot the scam.",
+     "color": "#A855F7",
+     "icon": "VISIBILITY_OFF",
+     "weight": 0.35,
+     "contribution": 5,
+     "evidence": [
+      "Please don't tell Dad"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "short": "Urgency",
+     "description": "Scammers rush you so you don't stop to think or check with someone.",
+     "color": "#F59E0B",
+     "icon": "TIMER",
+     "weight": 0.25,
+     "contribution": 4,
+     "evidence": [
+      "pay a bill urgently today"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "short": "Authority",
+     "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+     "color": "#6366F1",
+     "icon": "ACCOUNT_BALANCE",
+     "weight": 0.2,
+     "contribution": 2,
+     "evidence": [
+      "MCB"
+     ],
+     "details": [
+      "Mentions MCB (Mauritius Commercial Bank) to look trustworthy."
+     ]
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "impersonation_personal",
+     "label": "Pretends to be someone you know",
+     "evidence": "Hi Mum",
+     "start": 0,
+     "end": 6,
+     "weight": 0.4,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "impersonation_personal",
+     "label": "Pretends to be someone you know",
+     "evidence": "it's me",
+     "start": 8,
+     "end": 15,
+     "weight": 0.15,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "impersonation_personal",
+     "label": "Pretends to be someone you know",
+     "evidence": "dropped my phone",
+     "start": 19,
+     "end": 35,
+     "weight": 0.4,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "impersonation_personal",
+     "label": "Pretends to be someone you know",
+     "evidence": "this is my new number",
+     "start": 52,
+     "end": 73,
+     "weight": 0.4,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "pay a bill urgently today",
+     "start": 85,
+     "end": 110,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "evidence": "can you transfer",
+     "start": 112,
+     "end": 128,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "evidence": "transfer Rs",
+     "start": 120,
+     "end": 131,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_redirection",
+     "label": "New or changed bank details",
+     "evidence": "to this account",
+     "start": 139,
+     "end": 154,
+     "weight": 0.45,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_redirection",
+     "label": "New or changed bank details",
+     "evidence": "000451239876",
+     "start": 155,
+     "end": 167,
+     "weight": 0.2,
+     "detail": "An account number sent by message: verify it before paying.",
+     "source": "rule"
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "MCB",
+     "start": 169,
+     "end": 172,
+     "weight": 0.2,
+     "detail": "Mentions MCB (Mauritius Commercial Bank) to look trustworthy.",
+     "source": "rule"
+    },
+    {
+     "tactic": "secrecy",
+     "label": "Asks you to keep it secret",
+     "evidence": "Please don't tell Dad",
+     "start": 203,
+     "end": 224,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "Hi Mum",
+     "tactic": "impersonation_personal"
+    },
+    {
+     "text": ", ",
+     "tactic": null
+    },
+    {
+     "text": "it's me",
+     "tactic": "impersonation_personal"
+    },
+    {
+     "text": ". I ",
+     "tactic": null
+    },
+    {
+     "text": "dropped my phone",
+     "tactic": "impersonation_personal"
+    },
+    {
+     "text": " in the water so ",
+     "tactic": null
+    },
+    {
+     "text": "this is my new number",
+     "tactic": "impersonation_personal"
+    },
+    {
+     "text": ". I need to ",
+     "tactic": null
+    },
+    {
+     "text": "pay a bill urgently today",
+     "tactic": "urgency"
+    },
+    {
+     "text": ", ",
+     "tactic": null
+    },
+    {
+     "text": "can you transfer Rs",
+     "tactic": "payment_request"
+    },
+    {
+     "text": " 18,500 ",
+     "tactic": null
+    },
+    {
+     "text": "to this account",
+     "tactic": "payment_redirection"
+    },
+    {
+     "text": " ",
+     "tactic": null
+    },
+    {
+     "text": "000451239876",
+     "tactic": "payment_redirection"
+    },
+    {
+     "text": " (",
+     "tactic": null
+    },
+    {
+     "text": "MCB",
+     "tactic": "authority"
+    },
+    {
+     "text": ")? I'll pay you back tomorrow. ",
+     "tactic": null
+    },
+    {
+     "text": "Please don't tell Dad",
+     "tactic": "secrecy"
+    },
+    {
+     "text": " yet 🙏",
+     "tactic": null
+    }
+   ],
+   "advice": [
+    {
+     "id": "call_mcb",
+     "title": "Contact MCB directly",
+     "detail": "Don't use any number from this message. Use the number on the back of your card or on https://www.mcb.mu.",
+     "action": "call_official",
+     "payload": {
+      "org_id": "mcb",
+      "website": "https://www.mcb.mu",
+      "phone": null
+     }
+    },
+    {
+     "id": "verify_person",
+     "title": "Call them on their old number",
+     "detail": "Or ask a question only the real person would know before sending anything.",
+     "action": "verify_contact",
+     "payload": {}
+    },
+    {
+     "id": "pause_payment",
+     "title": "Don't send money yet",
+     "detail": "Check the request on a number you already trust, or ask someone you trust, before paying anything.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "tell_someone",
+     "title": "Tell someone you trust",
+     "detail": "Scammers ask for secrecy because a second opinion stops scams.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "report",
+     "title": "Report and block the sender",
+     "detail": "Report it on MAUCORS (Mauritian Cybercrime Online Reporting System) and block the number so it can't target others.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://maucors.govmu.org"
+     }
+    }
+   ],
+   "verification_reply": "Before I send anything I need to be sure it's you. I'm going to call your old number now. If you can't answer, send me a voice note saying the name of our first pet.",
+   "score_breakdown": [
+    {
+     "source": "memory",
+     "label": "Scam memory",
+     "points": 41,
+     "detail": "93% similar to a known scam (family or friend impersonation)"
+    },
+    {
+     "source": "rules",
+     "label": "Warning-sign rules",
+     "points": 32,
+     "detail": "6 warning sign(s) found by the rule engine"
+    },
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 27,
+     "detail": "Wording is 65% scam-like"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.6460250616073608,
+    "similar": [
+     {
+      "id": "train-13",
+      "label": "scam",
+      "similarity": 0.926,
+      "category": "family_emergency",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1649125,
+      "preview": "Mum it's me, I'm using a friend's phone. I'm in trouble and need Rs 15,000 urgently. Please send it to this account [ACCOUNT] and don't tell",
+      "strength": 1.0,
+      "category_label": "Family or friend impersonation"
+     },
+     {
+      "id": "train-12",
+      "label": "scam",
+      "similarity": 0.902,
+      "category": "family_emergency",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1649094,
+      "preview": "Hi Dad, my phone broke so this is my new number. Can you send me Rs 9,000 for my rent today? I'll explain later, don't call I can't talk.",
+      "strength": 0.68,
+      "category_label": "Family or friend impersonation"
+     },
+     {
+      "id": "train-4204",
+      "label": "scam",
+      "similarity": 0.901,
+      "category": "bank_impersonation",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1664295,
+      "preview": "URGENT: Mauritius Commercial Bank detected unusual activity on your account. A transfer of Rs 18,500 is pending. Verify by sending the code ",
+      "strength": 0.67,
+      "category_label": "Fake bank or official message"
+     }
+    ],
+    "memory_match": null,
+    "links": [],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.98,
+     "classifier": 0.646,
+     "memory": 0.995,
+     "genuine": 0.659,
+     "url": 0.0,
+     "community": 0.0
+    },
+    "notes": [
+     "Parts of this message look like genuine messages, which lowered the score."
+    ]
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [],
+    "domains": [],
+    "phone_numbers": [
+     "+230 5934 1182"
+    ],
+    "accounts": [
+     "000451239876"
+    ],
+    "wallets": [],
+    "amounts": [
+     "Rs 18,500"
+    ],
+    "brands": [
+     "mcb"
+    ],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 1,
+    "redacted_types": {
+     "ACCOUNT": 1
+    },
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 46,
+    "rules_fired": 11,
+    "rules_score": 98,
+    "combos": [
+     "Claims to be someone you know AND asks for money.",
+     "Claims to be someone you know AND gives a new account.",
+     "Rushes you AND asks for money.",
+     "Asks for money AND tells you to keep it secret."
+    ],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  },
+  "Congratulations! You have been selected for our VIP crypto trading group. Guaranteed returns of 30% per week, zero risk. Start with only Rs 5,000 — send USDT to wallet TXk4n2bQpR7sLm9VwZ3yH8cD5fJ1gA6eNq. Limited slots, offer ends tonight!": {
+   "analysis_id": "offline-crypto",
+   "created_at": "2026-09-23T21:38:33.182185+00:00",
+   "risk_score": 100,
+   "risk_level": "high",
+   "verdict": "Likely scam: do not pay or reply",
+   "summary": "This message shows 4 warning signs typical of a investment / crypto scam: too good to be true, unusual payment method, asks you to send money and pressure to act fast. Our AI language model also finds the wording typical of scams (99%).",
+   "category": "investment",
+   "category_label": "Investment / crypto scam",
+   "language": "en",
+   "tactics": [
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "short": "Too good",
+     "description": "Prizes, guaranteed profits or 'risk-free' returns are classic bait.",
+     "color": "#10B981",
+     "icon": "CARD_GIFTCARD",
+     "weight": 0.45,
+     "contribution": 9,
+     "evidence": [
+      "Congratulations",
+      "You have been selected",
+      "Guaranteed",
+      "30% per week",
+      "zero risk"
+     ],
+     "details": [
+      "Promised returns like this are far above anything a legitimate investment offers."
+     ]
+    },
+    {
+     "tactic": "unusual_payment",
+     "label": "Unusual payment method",
+     "short": "Crypto / gift card",
+     "description": "Crypto, gift cards and wire services are hard to trace and nearly impossible to reverse.",
+     "color": "#84CC16",
+     "icon": "CURRENCY_BITCOIN",
+     "weight": 0.6,
+     "contribution": 9,
+     "evidence": [
+      "crypto",
+      "USDT",
+      "TXk4n2bQpR7sLm9VwZ3yH8cD5fJ1gA6eNq"
+     ],
+     "details": [
+      "A crypto wallet address: payments to it can't be reversed."
+     ]
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "short": "Payment",
+     "description": "The message asks for a payment, fee or transfer.",
+     "color": "#F97316",
+     "icon": "PAYMENTS",
+     "weight": 0.25,
+     "contribution": 7,
+     "evidence": [
+      "send USDT"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "short": "Urgency",
+     "description": "Scammers rush you so you don't stop to think or check with someone.",
+     "color": "#F59E0B",
+     "icon": "TIMER",
+     "weight": 0.3,
+     "contribution": 6,
+     "evidence": [
+      "Limited slots",
+      "offer ends tonight"
+     ],
+     "details": []
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "Congratulations",
+     "start": 0,
+     "end": 15,
+     "weight": 0.2,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "You have been selected",
+     "start": 17,
+     "end": 39,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "unusual_payment",
+     "label": "Unusual payment method",
+     "evidence": "crypto",
+     "start": 52,
+     "end": 58,
+     "weight": 0.45,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "Guaranteed",
+     "start": 74,
+     "end": 84,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "30% per week",
+     "start": 96,
+     "end": 108,
+     "weight": 0.35,
+     "detail": "Promised returns like this are far above anything a legitimate investment offers.",
+     "source": "rule"
+    },
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "zero risk",
+     "start": 110,
+     "end": 119,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "evidence": "send USDT",
+     "start": 148,
+     "end": 157,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "unusual_payment",
+     "label": "Unusual payment method",
+     "evidence": "USDT",
+     "start": 153,
+     "end": 157,
+     "weight": 0.45,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "unusual_payment",
+     "label": "Unusual payment method",
+     "evidence": "TXk4n2bQpR7sLm9VwZ3yH8cD5fJ1gA6eNq",
+     "start": 168,
+     "end": 202,
+     "weight": 0.5,
+     "detail": "A crypto wallet address: payments to it can't be reversed.",
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "Limited slots",
+     "start": 204,
+     "end": 217,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "offer ends tonight",
+     "start": 219,
+     "end": 237,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "Congratulations",
+     "tactic": "reward"
+    },
+    {
+     "text": "! ",
+     "tactic": null
+    },
+    {
+     "text": "You have been selected",
+     "tactic": "reward"
+    },
+    {
+     "text": " for our VIP ",
+     "tactic": null
+    },
+    {
+     "text": "crypto",
+     "tactic": "unusual_payment"
+    },
+    {
+     "text": " trading group. ",
+     "tactic": null
+    },
+    {
+     "text": "Guaranteed",
+     "tactic": "reward"
+    },
+    {
+     "text": " returns of ",
+     "tactic": null
+    },
+    {
+     "text": "30% per week",
+     "tactic": "reward"
+    },
+    {
+     "text": ", ",
+     "tactic": null
+    },
+    {
+     "text": "zero risk",
+     "tactic": "reward"
+    },
+    {
+     "text": ". Start with only Rs 5,000 — ",
+     "tactic": null
+    },
+    {
+     "text": "send ",
+     "tactic": "payment_request"
+    },
+    {
+     "text": "USDT",
+     "tactic": "unusual_payment"
+    },
+    {
+     "text": " to wallet ",
+     "tactic": null
+    },
+    {
+     "text": "TXk4n2bQpR7sLm9VwZ3yH8cD5fJ1gA6eNq",
+     "tactic": "unusual_payment"
+    },
+    {
+     "text": ". ",
+     "tactic": null
+    },
+    {
+     "text": "Limited slots",
+     "tactic": "urgency"
+    },
+    {
+     "text": ", ",
+     "tactic": null
+    },
+    {
+     "text": "offer ends tonight",
+     "tactic": "urgency"
+    },
+    {
+     "text": "!",
+     "tactic": null
+    }
+   ],
+   "advice": [
+    {
+     "id": "pause_payment",
+     "title": "Don't send money yet",
+     "detail": "Check the request on a number you already trust, or ask someone you trust, before paying anything.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "check_fsc",
+     "title": "Check the company is licensed",
+     "detail": "Look it up on the Financial Services Commission website before investing anything.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://www.fscmauritius.org"
+     }
+    },
+    {
+     "id": "report",
+     "title": "Report and block the sender",
+     "detail": "Report it on MAUCORS (Mauritian Cybercrime Online Reporting System) and block the number so it can't target others.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://maucors.govmu.org"
+     }
+    }
+   ],
+   "verification_reply": "Please send your FSC licence number. I will check it on the FSC website before I invest anything.",
+   "score_breakdown": [
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 47,
+     "detail": "Wording is 99% scam-like"
+    },
+    {
+     "source": "rules",
+     "label": "Warning-sign rules",
+     "points": 31,
+     "detail": "4 warning sign(s) found by the rule engine"
+    },
+    {
+     "source": "memory",
+     "label": "Scam memory",
+     "points": 22,
+     "detail": "90% similar to a known scam (investment / crypto scam)"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.9865869283676147,
+    "similar": [
+     {
+      "id": "train-19",
+      "label": "scam",
+      "similarity": 0.896,
+      "category": "investment",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.164929,
+      "preview": "Invest Rs 10,000 today and receive Rs 45,000 in 7 days. 100% guaranteed by our licensed forex traders. Only 5 places left!",
+      "strength": 0.6,
+      "category_label": "Investment / crypto scam"
+     },
+     {
+      "id": "train-36",
+      "label": "scam",
+      "similarity": 0.892,
+      "category": "investment",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1649668,
+      "preview": "Investissez Rs 5 000 et gagnez 30% par semaine. Rendement garanti, sans risque. Places limitées !",
+      "strength": 0.54,
+      "category_label": "Investment / crypto scam"
+     },
+     {
+      "id": "train-20",
+      "label": "scam",
+      "similarity": 0.89,
+      "category": "investment",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.164931,
+      "preview": "Join our VIP Bitcoin signals group. Our members doubled their money last month. Start with 200 USDT, withdrawals anytime.",
+      "strength": 0.52,
+      "category_label": "Investment / crypto scam"
+     }
+    ],
+    "memory_match": null,
+    "links": [],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.95,
+     "classifier": 0.987,
+     "memory": 0.599,
+     "genuine": 0.199,
+     "url": 0.0,
+     "community": 0.0
+    },
+    "notes": []
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [],
+    "domains": [],
+    "phone_numbers": [
+     "+44 7700 900123"
+    ],
+    "accounts": [],
+    "wallets": [
+     "TXk4n2bQpR7sLm9VwZ3yH8cD5fJ1gA6eNq"
+    ],
+    "amounts": [
+     "Rs 5,000"
+    ],
+    "brands": [],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 0,
+    "redacted_types": {},
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 52,
+    "rules_fired": 11,
+    "rules_score": 95,
+    "combos": [
+     "Rushes you AND asks for money.",
+     "Promises a reward AND asks you to pay first.",
+     "Promises profits AND wants crypto or gift cards."
+    ],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  },
+  "Cher client, votre compte SBM sera bloqué aujourd'hui. Veuillez confirmer vos coordonnées bancaires et votre code OTP ici : sbm-mu.info/confirm": {
+   "analysis_id": "offline-french_bank",
+   "created_at": "2026-09-23T21:38:33.219013+00:00",
+   "risk_score": 100,
+   "risk_level": "high",
+   "verdict": "Likely scam: do not pay or reply",
+   "summary": "It matches a known scam (fake delivery / customs fee) (95% similar). This message shows 5 warning signs typical of a fake delivery / customs fee: asks for codes or passwords, claims to be an official organisation, suspicious link and threats or fear.",
+   "category": "parcel_fee",
+   "category_label": "Fake delivery / customs fee",
+   "language": "fr",
+   "tactics": [
+    {
+     "tactic": "credential_request",
+     "label": "Asks for codes or passwords",
+     "short": "OTP / PIN",
+     "description": "Requests for your OTP, PIN, password or card details are the strongest scam signal.",
+     "color": "#DC2626",
+     "icon": "PASSWORD",
+     "weight": 0.55,
+     "contribution": 9,
+     "evidence": [
+      "confirmer vos coordonnées bancaires"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "short": "Authority",
+     "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+     "color": "#6366F1",
+     "icon": "ACCOUNT_BALANCE",
+     "weight": 0.25,
+     "contribution": 5,
+     "evidence": [
+      "Cher client",
+      "SBM"
+     ],
+     "details": [
+      "Generic greeting: your real bank normally uses your name.",
+      "Mentions SBM Bank to look trustworthy."
+     ]
+    },
+    {
+     "tactic": "suspicious_link",
+     "label": "Suspicious link",
+     "short": "Link",
+     "description": "The link hides its real destination or imitates an official website.",
+     "color": "#0EA5E9",
+     "icon": "LINK_OFF",
+     "weight": 0.3,
+     "contribution": 5,
+     "evidence": [
+      "sbm-mu.info/confirm"
+     ],
+     "details": [
+      "Uses a '.info' address, common in throwaway scam sites."
+     ]
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "short": "Threat",
+     "description": "Warnings about blocked accounts, fines or police are used to frighten you into acting.",
+     "color": "#EF4444",
+     "icon": "WARNING_AMBER",
+     "weight": 0.3,
+     "contribution": 5,
+     "evidence": [
+      "sera bloqué"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "short": "Urgency",
+     "description": "Scammers rush you so you don't stop to think or check with someone.",
+     "color": "#F59E0B",
+     "icon": "TIMER",
+     "weight": 0.15,
+     "contribution": 2,
+     "evidence": [
+      "aujourd'hui"
+     ],
+     "details": []
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "Cher client",
+     "start": 0,
+     "end": 11,
+     "weight": 0.2,
+     "detail": "Generic greeting: your real bank normally uses your name.",
+     "source": "rule"
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "SBM",
+     "start": 26,
+     "end": 29,
+     "weight": 0.2,
+     "detail": "Mentions SBM Bank to look trustworthy.",
+     "source": "rule"
+    },
+    {
+     "tactic": "threat",
+     "label": "Threats or fear",
+     "evidence": "sera bloqué",
+     "start": 30,
+     "end": 41,
+     "weight": 0.3,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "aujourd'hui",
+     "start": 42,
+     "end": 53,
+     "weight": 0.15,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "credential_request",
+     "label": "Asks for codes or passwords",
+     "evidence": "confirmer vos coordonnées bancaires",
+     "start": 64,
+     "end": 99,
+     "weight": 0.55,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "suspicious_link",
+     "label": "Suspicious link",
+     "evidence": "sbm-mu.info/confirm",
+     "start": 124,
+     "end": 143,
+     "weight": 0.3,
+     "detail": "Uses a '.info' address, common in throwaway scam sites.",
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "Cher client",
+     "tactic": "authority"
+    },
+    {
+     "text": ", votre compte ",
+     "tactic": null
+    },
+    {
+     "text": "SBM",
+     "tactic": "authority"
+    },
+    {
+     "text": " ",
+     "tactic": null
+    },
+    {
+     "text": "sera bloqué",
+     "tactic": "threat"
+    },
+    {
+     "text": " ",
+     "tactic": null
+    },
+    {
+     "text": "aujourd'hui",
+     "tactic": "urgency"
+    },
+    {
+     "text": ". Veuillez ",
+     "tactic": null
+    },
+    {
+     "text": "confirmer vos coordonnées bancaires",
+     "tactic": "credential_request"
+    },
+    {
+     "text": " et votre code OTP ici : ",
+     "tactic": null
+    },
+    {
+     "text": "sbm-mu.info/confirm",
+     "tactic": "suspicious_link"
+    }
+   ],
+   "advice": [
+    {
+     "id": "known_scam",
+     "title": "This is a known scam",
+     "detail": "FraudLens has seen this scam before. Don't reply, pay or click. Delete it and block the sender.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "no_codes",
+     "title": "Never share your OTP, PIN or password",
+     "detail": "No bank, courier or government office will ever ask for them by message or phone.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "no_link",
+     "title": "Don't tap the link",
+     "detail": "Uses a '.info' address, common in throwaway scam sites. Open your official app instead.",
+     "action": null,
+     "payload": {}
+    },
+    {
+     "id": "call_sbm",
+     "title": "Contact SBM Bank directly",
+     "detail": "Don't use any number from this message. Use the number on the back of your card or on https://www.sbmgroup.mu.",
+     "action": "call_official",
+     "payload": {
+      "org_id": "sbm",
+      "website": "https://www.sbmgroup.mu",
+      "phone": null
+     }
+    },
+    {
+     "id": "report",
+     "title": "Report and block the sender",
+     "detail": "Report it on MAUCORS (Mauritian Cybercrime Online Reporting System) and block the number so it can't target others.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://maucors.govmu.org"
+     }
+    }
+   ],
+   "verification_reply": "I don't act on payment or security requests by message. I will contact the organisation directly using the official number I already have.",
+   "score_breakdown": [
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 38,
+     "detail": "Wording is 93% scam-like"
+    },
+    {
+     "source": "memory",
+     "label": "Scam memory",
+     "points": 36,
+     "detail": "95% similar to a known scam (fake delivery / customs fee)"
+    },
+    {
+     "source": "rules",
+     "label": "Warning-sign rules",
+     "points": 26,
+     "detail": "5 warning sign(s) found by the rule engine"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.9318418502807617,
+    "similar": [
+     {
+      "id": "train-4241",
+      "label": "scam",
+      "similarity": 0.947,
+      "category": "parcel_fee",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1665015,
+      "preview": "Votre compte bancaire BCP est temporairement bloqué. Afin de le débloquer, veuillez confirmer votre identité en fournissant votre code OTP r",
+      "strength": 1.0,
+      "category_label": "Fake delivery / customs fee"
+     },
+     {
+      "id": "train-4333",
+      "label": "scam",
+      "similarity": 0.944,
+      "category": "family_emergency",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1666749,
+      "preview": "Bonjour! Votre compte bancaire MCB a été temporairement bloqué. Pour le débloquer, veuillez confirmer vos informations via ce lien: example-",
+      "strength": 1.0,
+      "category_label": "Family or friend impersonation"
+     },
+     {
+      "id": "train-4353",
+      "label": "scam",
+      "similarity": 0.944,
+      "category": "family_emergency",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1667106,
+      "preview": "Attention! Votre compte bancaire Mauritius Postbank est bloqué en raison d'une tentative de transaction non autorisée. Veuillez confirmer vo",
+      "strength": 1.0,
+      "category_label": "Family or friend impersonation"
+     }
+    ],
+    "memory_match": {
+     "id": "train-4241",
+     "label": "scam",
+     "similarity": 0.947,
+     "category": "parcel_fee",
+     "source": "training",
+     "reports": 1,
+     "created_at": 1790183288.1665015,
+     "preview": "Votre compte bancaire BCP est temporairement bloqué. Afin de le débloquer, veuillez confirmer votre identité en fournissant votre code OTP r",
+     "category_label": "Fake delivery / customs fee"
+    },
+    "links": [
+     {
+      "url": "sbm-mu.info/confirm",
+      "phishing_probability": 0.936
+     }
+    ],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.92,
+     "classifier": 0.932,
+     "memory": 1.0,
+     "genuine": 0.83,
+     "url": 0.936,
+     "community": 0.0
+    },
+    "notes": [
+     "Parts of this message look like genuine messages, which lowered the score."
+    ]
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [
+     "sbm-mu.info/confirm"
+    ],
+    "domains": [
+     "sbm-mu.info"
+    ],
+    "phone_numbers": [],
+    "accounts": [],
+    "wallets": [],
+    "amounts": [],
+    "brands": [
+     "sbm"
+    ],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 0,
+    "redacted_types": {},
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 36,
+    "rules_fired": 6,
+    "rules_score": 92,
+    "combos": [
+     "Pretends to be an organisation AND asks for your codes.",
+     "Threatens you AND pushes a link."
+    ],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  },
+  "Bonzour! Ou finn gagne Rs 50,000 dan tiraz MCB. Avoy Rs 1,500 vit vit pou resevwar ou kas. Pa dir personn.": {
+   "analysis_id": "offline-kreol_prize",
+   "created_at": "2026-09-23T21:38:33.249204+00:00",
+   "risk_score": 100,
+   "risk_level": "high",
+   "verdict": "Likely scam: do not pay or reply",
+   "summary": "This message shows 6 warning signs typical of a fake prize or lottery: asks you to send money, too good to be true, asks you to keep it secret and sender doesn't match who it claims to be. Our AI language model also finds the wording typical of scams (90%).",
+   "category": "prize",
+   "category_label": "Fake prize or lottery",
+   "language": "mfe",
+   "tactics": [
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "short": "Payment",
+     "description": "The message asks for a payment, fee or transfer.",
+     "color": "#F97316",
+     "icon": "PAYMENTS",
+     "weight": 0.25,
+     "contribution": 7,
+     "evidence": [
+      "Avoy Rs"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "short": "Too good",
+     "description": "Prizes, guaranteed profits or 'risk-free' returns are classic bait.",
+     "color": "#10B981",
+     "icon": "CARD_GIFTCARD",
+     "weight": 0.4,
+     "contribution": 6,
+     "evidence": [
+      "Ou finn gagne",
+      "tiraz"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "secrecy",
+     "label": "Asks you to keep it secret",
+     "short": "Secrecy",
+     "description": "Scammers isolate you from people who could spot the scam.",
+     "color": "#A855F7",
+     "icon": "VISIBILITY_OFF",
+     "weight": 0.35,
+     "contribution": 5,
+     "evidence": [
+      "Pa dir personn"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "sender_mismatch",
+     "label": "Sender doesn't match who it claims to be",
+     "short": "Wrong sender",
+     "description": "The message claims to come from an organisation but was sent from a personal phone number.",
+     "color": "#9333EA",
+     "icon": "PHONELINK_ERASE",
+     "weight": 0.45,
+     "contribution": 5,
+     "evidence": [
+      "+230 5710 2299"
+     ],
+     "details": [
+      "Claims to be MCB (Mauritius Commercial Bank) but was sent from a personal phone number (+230 5710 2299)."
+     ]
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "short": "Urgency",
+     "description": "Scammers rush you so you don't stop to think or check with someone.",
+     "color": "#F59E0B",
+     "icon": "TIMER",
+     "weight": 0.25,
+     "contribution": 4,
+     "evidence": [
+      "vit vit"
+     ],
+     "details": []
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "short": "Authority",
+     "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+     "color": "#6366F1",
+     "icon": "ACCOUNT_BALANCE",
+     "weight": 0.2,
+     "contribution": 2,
+     "evidence": [
+      "MCB"
+     ],
+     "details": [
+      "Mentions MCB (Mauritius Commercial Bank) to look trustworthy."
+     ]
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "Ou finn gagne",
+     "start": 9,
+     "end": 22,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "reward",
+     "label": "Too good to be true",
+     "evidence": "tiraz",
+     "start": 37,
+     "end": 42,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "MCB",
+     "start": 43,
+     "end": 46,
+     "weight": 0.2,
+     "detail": "Mentions MCB (Mauritius Commercial Bank) to look trustworthy.",
+     "source": "rule"
+    },
+    {
+     "tactic": "payment_request",
+     "label": "Asks you to send money",
+     "evidence": "Avoy Rs",
+     "start": 48,
+     "end": 55,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "urgency",
+     "label": "Pressure to act fast",
+     "evidence": "vit vit",
+     "start": 62,
+     "end": 69,
+     "weight": 0.25,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "secrecy",
+     "label": "Asks you to keep it secret",
+     "evidence": "Pa dir personn",
+     "start": 91,
+     "end": 105,
+     "weight": 0.35,
+     "detail": null,
+     "source": "rule"
+    },
+    {
+     "tactic": "sender_mismatch",
+     "label": "Sender doesn't match who it claims to be",
+     "evidence": "+230 5710 2299",
+     "start": null,
+     "end": null,
+     "weight": 0.45,
+     "detail": "Claims to be MCB (Mauritius Commercial Bank) but was sent from a personal phone number (+230 5710 2299).",
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "Bonzour! ",
+     "tactic": null
+    },
+    {
+     "text": "Ou finn gagne",
+     "tactic": "reward"
+    },
+    {
+     "text": " Rs 50,000 dan ",
+     "tactic": null
+    },
+    {
+     "text": "tiraz",
+     "tactic": "reward"
+    },
+    {
+     "text": " ",
+     "tactic": null
+    },
+    {
+     "text": "MCB",
+     "tactic": "authority"
+    },
+    {
+     "text": ". ",
+     "tactic": null
+    },
+    {
+     "text": "Avoy Rs",
+     "tactic": "payment_request"
+    },
+    {
+     "text": " 1,500 ",
+     "tactic": null
+    },
+    {
+     "text": "vit vit",
+     "tactic": "urgency"
+    },
+    {
+     "text": " pou resevwar ou kas. ",
+     "tactic": null
+    },
+    {
+     "text": "Pa dir personn",
+     "tactic": "secrecy"
+    },
+    {
+     "text": ".",
+     "tactic": null
+    }
+   ],
+   "advice": [
+    {
+     "id": "call_mcb",
+     "title": "Contact MCB directly",
+     "detail": "Don't use any number from this message. Use the number on the back of your card or on https://www.mcb.mu.",
+     "action": "call_official",
+     "payload": {
+      "org_id": "mcb",
+      "website": "https://www.mcb.mu",
+      "phone": null
+     }
+    },
+    {
+     "id": "pause_payment",
+     "title": "Don't send money yet",
+     "detail": "Check the request on a number you already trust, or ask someone you trust, before paying anything.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "check_fsc",
+     "title": "Check the company is licensed",
+     "detail": "Look it up on the Financial Services Commission website before investing anything.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://www.fscmauritius.org"
+     }
+    },
+    {
+     "id": "tell_someone",
+     "title": "Tell someone you trust",
+     "detail": "Scammers ask for secrecy because a second opinion stops scams.",
+     "action": "share_guardian",
+     "payload": {}
+    },
+    {
+     "id": "report",
+     "title": "Report and block the sender",
+     "detail": "Report it on MAUCORS (Mauritian Cybercrime Online Reporting System) and block the number so it can't target others.",
+     "action": "open_url",
+     "payload": {
+      "url": "https://maucors.govmu.org"
+     }
+    }
+   ],
+   "verification_reply": "I don't act on payment or security requests by message. I will contact the organisation directly using the official number I already have.",
+   "score_breakdown": [
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 38,
+     "detail": "Wording is 90% scam-like"
+    },
+    {
+     "source": "memory",
+     "label": "Scam memory",
+     "points": 33,
+     "detail": "92% similar to a known scam (fake prize or lottery)"
+    },
+    {
+     "source": "rules",
+     "label": "Warning-sign rules",
+     "points": 29,
+     "detail": "6 warning sign(s) found by the rule engine"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.9008921384811401,
+    "similar": [
+     {
+      "id": "train-40",
+      "label": "scam",
+      "similarity": 0.918,
+      "category": "prize",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.164976,
+      "preview": "Felisitasion! Ou finn gagne Rs 100,000 dan loto. Avoy Rs 2,000 fre pou resevwar ou kas.",
+      "strength": 0.89,
+      "category_label": "Fake prize or lottery"
+     },
+     {
+      "id": "train-4362",
+      "label": "scam",
+      "similarity": 0.911,
+      "category": "parcel_fee",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1667268,
+      "preview": "Alô! Mauvaise nouvelle. Mo koli pou resi Rs 9,200 si ou pa avoy sa kod la vitman. Apel MCB pou confirm sa: [PHONE]. Mo bizin sa kisa pou mo ",
+      "strength": 0.79,
+      "category_label": "Fake delivery / customs fee"
+     },
+     {
+      "id": "train-42",
+      "label": "scam",
+      "similarity": 0.906,
+      "category": "job",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1649892,
+      "preview": "Travay depi lakaz, gagn Rs 2,000 par zour. Avoy Rs 500 pou enskri. Pa rat sa sans la!",
+      "strength": 0.74,
+      "category_label": "Job or task scam"
+     }
+    ],
+    "memory_match": null,
+    "links": [],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.95,
+     "classifier": 0.901,
+     "memory": 0.89,
+     "genuine": 0.661,
+     "url": 0.0,
+     "community": 0.0
+    },
+    "notes": [
+     "Parts of this message look like genuine messages, which lowered the score."
+    ]
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [],
+    "domains": [],
+    "phone_numbers": [
+     "+230 5710 2299"
+    ],
+    "accounts": [],
+    "wallets": [],
+    "amounts": [
+     "Rs 50,000",
+     "Rs 1,500"
+    ],
+    "brands": [
+     "mcb"
+    ],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 0,
+    "redacted_types": {},
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 30,
+    "rules_fired": 7,
+    "rules_score": 95,
+    "combos": [
+     "Rushes you AND asks for money.",
+     "Promises a reward AND asks you to pay first.",
+     "Asks for money AND tells you to keep it secret."
+    ],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  },
+  "MCB: Your OTP for the online payment of Rs 1,250.00 at DARTY is 482913. Never share this code with anyone, including MCB staff.": {
+   "analysis_id": "offline-legit_otp",
+   "created_at": "2026-09-23T21:38:33.277831+00:00",
+   "risk_score": 8,
+   "risk_level": "low",
+   "verdict": "No strong warning signs",
+   "summary": "We found 1 minor warning sign (claims to be an official organisation), but nothing that strongly suggests a scam.",
+   "category": "none",
+   "category_label": "No scam pattern detected",
+   "language": "en",
+   "tactics": [
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "short": "Authority",
+     "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+     "color": "#6366F1",
+     "icon": "ACCOUNT_BALANCE",
+     "weight": 0.2,
+     "contribution": 0,
+     "evidence": [
+      "MCB"
+     ],
+     "details": [
+      "Mentions MCB (Mauritius Commercial Bank) to look trustworthy."
+     ]
+    }
+   ],
+   "signals": [
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "MCB",
+     "start": 0,
+     "end": 3,
+     "weight": 0.2,
+     "detail": "Mentions MCB (Mauritius Commercial Bank) to look trustworthy.",
+     "source": "rule"
+    },
+    {
+     "tactic": "authority",
+     "label": "Claims to be an official organisation",
+     "evidence": "MCB",
+     "start": 117,
+     "end": 120,
+     "weight": 0.2,
+     "detail": "Mentions MCB (Mauritius Commercial Bank) to look trustworthy.",
+     "source": "rule"
+    }
+   ],
+   "segments": [
+    {
+     "text": "MCB",
+     "tactic": "authority"
+    },
+    {
+     "text": ": Your OTP for the online payment of Rs 1,250.00 at DARTY is 482913. Never share this code with anyone, including ",
+     "tactic": null
+    },
+    {
+     "text": "MCB",
+     "tactic": "authority"
+    },
+    {
+     "text": " staff.",
+     "tactic": null
+    }
+   ],
+   "advice": [
+    {
+     "id": "stay_alert",
+     "title": "Looks OK, stay alert",
+     "detail": "If this message later asks for money or codes, check again before acting.",
+     "action": null,
+     "payload": {}
+    }
+   ],
+   "verification_reply": "I don't act on payment or security requests by message. I will contact the organisation directly using the official number I already have.",
+   "score_breakdown": [
+    {
+     "source": "classifier",
+     "label": "AI language model",
+     "points": 8,
+     "detail": "Wording is 78% scam-like"
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.7786952257156372,
+    "similar": [
+     {
+      "id": "train-43",
+      "label": "legit",
+      "similarity": 0.953,
+      "category": "none",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1795902,
+      "preview": "MCB: Your OTP for the payment of Rs 3,150.00 at Winners is [CODE]. Never share this code with anyone.",
+      "strength": 1.0,
+      "category_label": "Genuine message"
+     },
+     {
+      "id": "train-4451",
+      "label": "legit",
+      "similarity": 0.916,
+      "category": "none",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1693468,
+      "preview": "Dear Mr. Singh, your Standard Chartered OTP for online banking verification is: [CODE].  Do not share this code with anyone. Access your acc",
+      "strength": 0.86,
+      "category_label": "Genuine message"
+     },
+     {
+      "id": "train-4375",
+      "label": "legit",
+      "similarity": 0.912,
+      "category": "none",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1701174,
+      "preview": "Important: Barclays Bank: A one-time password (OTP) of [CODE] has been sent to your mobile for a transaction. Do not share this with anyone.",
+      "strength": 0.82,
+      "category_label": "Genuine message"
+     }
+    ],
+    "memory_match": null,
+    "links": [],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.1,
+     "classifier": 0.779,
+     "memory": 0.192,
+     "genuine": 1.0,
+     "url": 0.0,
+     "community": 0.0
+    },
+    "notes": [
+     "Parts of this message look like genuine messages, which lowered the score."
+    ]
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [],
+    "domains": [],
+    "phone_numbers": [],
+    "accounts": [],
+    "wallets": [],
+    "amounts": [
+     "Rs 1,250.00"
+    ],
+    "brands": [
+     "mcb"
+    ],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 1,
+    "redacted_types": {
+     "CODE": 1
+    },
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 28,
+    "rules_fired": 2,
+    "rules_score": 10,
+    "combos": [],
+    "trust_notes": [
+     "Reminds you never to share your code, as genuine bank messages do."
+    ],
+    "trust_applied": true
+   }
+  },
+  "Hey! Still on for dinner on Saturday at 7? I booked a table at the usual place. I'll bring the photos from the trip.": {
+   "analysis_id": "offline-legit_friend",
+   "created_at": "2026-09-23T21:38:33.306848+00:00",
+   "risk_score": 1,
+   "risk_level": "low",
+   "verdict": "No strong warning signs",
+   "summary": "We didn't find common scam warning signs in this message. If it asks you to pay or share details, still verify it through a channel you already trust.",
+   "category": "none",
+   "category_label": "No scam pattern detected",
+   "language": "en",
+   "tactics": [],
+   "signals": [],
+   "segments": [
+    {
+     "text": "Hey! Still on for dinner on Saturday at 7? I booked a table at the usual place. I'll bring the photos from the trip.",
+     "tactic": null
+    }
+   ],
+   "advice": [
+    {
+     "id": "stay_alert",
+     "title": "Looks OK, stay alert",
+     "detail": "If this message later asks for money or codes, check again before acting.",
+     "action": null,
+     "payload": {}
+    }
+   ],
+   "verification_reply": "I don't act on payment or security requests by message. I will contact the organisation directly using the official number I already have.",
+   "score_breakdown": [
+    {
+     "source": "url",
+     "label": "Link model",
+     "points": 1,
+     "detail": ""
+    }
+   ],
+   "verification": {
+    "enabled": true,
+    "mode": "learned",
+    "embedder": "e5-small-onnx",
+    "model_version": "v20260923-210804",
+    "classifier_probability": 0.026548326015472412,
+    "similar": [
+     {
+      "id": "train-51",
+      "label": "legit",
+      "similarity": 0.892,
+      "category": "none",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1671393,
+      "preview": "Hey, are we still meeting at Bagatelle on Saturday? I'll bring the book you lent me.",
+      "strength": 0.54,
+      "category_label": "Genuine message"
+     },
+     {
+      "id": "train-1175",
+      "label": "legit",
+      "similarity": 0.884,
+      "category": "none",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.172797,
+      "preview": "R we still meeting 4 dinner tonight?",
+      "strength": 0.44,
+      "category_label": "Genuine message"
+     },
+     {
+      "id": "train-49",
+      "label": "legit",
+      "similarity": 0.881,
+      "category": "none",
+      "source": "training",
+      "reports": 1,
+      "created_at": 1790183288.1689098,
+      "preview": "Hi Mum, I'll be home late tonight, training finished at 8. Can you keep some dinner for me?",
+      "strength": 0.4,
+      "category_label": "Genuine message"
+     }
+    ],
+    "memory_match": null,
+    "links": [],
+    "community_reports": 0,
+    "layers": {
+     "rules": 0.0,
+     "classifier": 0.027,
+     "memory": 0.017,
+     "genuine": 0.545,
+     "url": 0.0,
+     "community": 0.0
+    },
+    "notes": [
+     "Parts of this message look like genuine messages, which lowered the score."
+    ]
+   },
+   "intel": {
+    "enabled": false,
+    "findings": [],
+    "providers": {},
+    "expanded_links": {},
+    "blocklisted": false,
+    "score": 0.0,
+    "latency_ms": 0
+   },
+   "entities": {
+    "urls": [],
+    "domains": [],
+    "phone_numbers": [],
+    "accounts": [],
+    "wallets": [],
+    "amounts": [],
+    "brands": [],
+    "official_links": []
+   },
+   "privacy": {
+    "redacted_items": 0,
+    "redacted_types": {},
+    "ai_used": false,
+    "ai_provider": "none",
+    "ai_error": null
+   },
+   "engine": {
+    "version": "hybrid-0.2",
+    "latency_ms": 28,
+    "rules_fired": 0,
+    "rules_score": 0,
+    "combos": [],
+    "trust_notes": [],
+    "trust_applied": false
+   }
+  }
+ },
+ "tactics": [
+  {
+   "id": "urgency",
+   "label": "Pressure to act fast",
+   "short": "Urgency",
+   "description": "Scammers rush you so you don't stop to think or check with someone.",
+   "weight": 0.25,
+   "color": "#F59E0B",
+   "icon": "TIMER",
+   "lesson": "Real banks and companies give you time. A deadline like 'within 2 hours' or 'today only' is designed to stop you from thinking clearly.",
+   "safe_action": "Slow down. No genuine payment is so urgent that you can't take 10 minutes to verify it.",
+   "examples": [
+    "within 2 hours",
+    "act now",
+    "today only",
+    "vit vit"
+   ]
+  },
+  {
+   "id": "authority",
+   "label": "Claims to be an official organisation",
+   "short": "Authority",
+   "description": "The message uses the name of a bank, post office or government body to earn your trust.",
+   "weight": 0.2,
+   "color": "#6366F1",
+   "icon": "ACCOUNT_BALANCE",
+   "lesson": "Anyone can type 'MCB' or 'Mauritius Post' into a message. A familiar name is not proof of who sent it.",
+   "safe_action": "Contact the organisation yourself using the number on your card or its official website.",
+   "examples": [
+    "Dear customer",
+    "Security Department",
+    "Bank of Mauritius"
+   ]
+  },
+  {
+   "id": "threat",
+   "label": "Threats or fear",
+   "short": "Threat",
+   "description": "Warnings about blocked accounts, fines or police are used to frighten you into acting.",
+   "weight": 0.3,
+   "color": "#EF4444",
+   "icon": "WARNING_AMBER",
+   "lesson": "Fear switches off careful thinking. Banks do not close accounts or send police by SMS.",
+   "safe_action": "Ignore the threat and check your account through your usual banking app.",
+   "examples": [
+    "account will be suspended",
+    "legal action",
+    "compte bloqué"
+   ]
+  },
+  {
+   "id": "secrecy",
+   "label": "Asks you to keep it secret",
+   "short": "Secrecy",
+   "description": "Scammers isolate you from people who could spot the scam.",
+   "weight": 0.35,
+   "color": "#A855F7",
+   "icon": "VISIBILITY_OFF",
+   "lesson": "If someone asks you not to tell your family or your bank, that is exactly who you should tell.",
+   "safe_action": "Talk to someone you trust before doing anything.",
+   "examples": [
+    "don't tell anyone",
+    "keep this confidential",
+    "pa dir personn"
+   ]
+  },
+  {
+   "id": "reward",
+   "label": "Too good to be true",
+   "short": "Too good",
+   "description": "Prizes, guaranteed profits or 'risk-free' returns are classic bait.",
+   "weight": 0.35,
+   "color": "#10B981",
+   "icon": "CARD_GIFTCARD",
+   "lesson": "Nobody guarantees high returns with no risk, and you can't win a lottery you never entered.",
+   "safe_action": "Check whether the company is licensed by the Financial Services Commission (FSC).",
+   "examples": [
+    "guaranteed returns",
+    "you have won",
+    "double your money"
+   ]
+  },
+  {
+   "id": "payment_request",
+   "label": "Asks you to send money",
+   "short": "Payment",
+   "description": "The message asks for a payment, fee or transfer.",
+   "weight": 0.25,
+   "color": "#F97316",
+   "icon": "PAYMENTS",
+   "lesson": "Small 'release fees' or 'processing fees' are a common hook. Once you pay one, more follow.",
+   "safe_action": "Never pay because a message told you to. Verify the request through a channel you already trust.",
+   "examples": [
+    "pay a fee",
+    "transfer Rs",
+    "release fee"
+   ]
+  },
+  {
+   "id": "credential_request",
+   "label": "Asks for codes or passwords",
+   "short": "OTP / PIN",
+   "description": "Requests for your OTP, PIN, password or card details are the strongest scam signal.",
+   "weight": 0.55,
+   "color": "#DC2626",
+   "icon": "PASSWORD",
+   "lesson": "Your OTP is the key to your account. Your bank will never ask for it, by SMS, phone or WhatsApp.",
+   "safe_action": "Never share an OTP, PIN, CVV or password with anyone.",
+   "examples": [
+    "reply with the OTP",
+    "confirm your PIN",
+    "code de vérification"
+   ]
+  },
+  {
+   "id": "suspicious_link",
+   "label": "Suspicious link",
+   "short": "Link",
+   "description": "The link hides its real destination or imitates an official website.",
+   "weight": 0.3,
+   "color": "#0EA5E9",
+   "icon": "LINK_OFF",
+   "lesson": "Scam links often look almost right: 'mcb-secure-verify.com' is not 'mcb.mu'. Short links hide where they go.",
+   "safe_action": "Don't tap the link. Open your bank's app or type the official address yourself.",
+   "examples": [
+    "bit.ly/...",
+    "mcb-secure-verify.com"
+   ]
+  },
+  {
+   "id": "payment_redirection",
+   "label": "New or changed bank details",
+   "short": "New account",
+   "description": "Being told to pay a new or different account is how invoice and family scams steal money.",
+   "weight": 0.45,
+   "color": "#E11D48",
+   "icon": "SWAP_HORIZ",
+   "lesson": "If bank details change by message, confirm by calling the person on a number you already had.",
+   "safe_action": "Confirm new bank details by phone using a number you already know.",
+   "examples": [
+    "our new account",
+    "updated bank details",
+    "this account"
+   ]
+  },
+  {
+   "id": "impersonation_personal",
+   "label": "Pretends to be someone you know",
+   "short": "Impersonation",
+   "description": "'Hi Mum, this is my new number' is a common way to borrow the trust of a loved one.",
+   "weight": 0.4,
+   "color": "#DB2777",
+   "icon": "PERSON_SEARCH",
+   "lesson": "A new number plus a money request is a red flag even if the tone sounds exactly like your child.",
+   "safe_action": "Call the person on their old number or ask a question only they could answer.",
+   "examples": [
+    "Hi Mum",
+    "this is my new number",
+    "mo nouvo nimero"
+   ]
+  },
+  {
+   "id": "unusual_payment",
+   "label": "Unusual payment method",
+   "short": "Crypto / gift card",
+   "description": "Crypto, gift cards and wire services are hard to trace and nearly impossible to reverse.",
+   "weight": 0.45,
+   "color": "#84CC16",
+   "icon": "CURRENCY_BITCOIN",
+   "lesson": "Legitimate businesses don't ask for payment in gift cards or crypto to a private wallet.",
+   "safe_action": "Refuse any request to pay with crypto or gift cards.",
+   "examples": [
+    "send USDT",
+    "Google Play card",
+    "bitcoin wallet"
+   ]
+  },
+  {
+   "id": "threat_intel",
+   "label": "Flagged by security databases",
+   "short": "Blocklisted",
+   "description": "Independent security services report this link or number as dangerous or brand-new.",
+   "weight": 0.6,
+   "color": "#7F1D1D",
+   "icon": "GPP_BAD",
+   "lesson": "Google Safe Browsing and malware databases track millions of dangerous sites. Scam websites are also usually registered just days before the SMS campaign starts.",
+   "safe_action": "Never open a link that security services have flagged, even if the message looks real.",
+   "examples": [
+    "Flagged by Google Safe Browsing",
+    "website registered 2 days ago"
+   ]
+  },
+  {
+   "id": "sender_mismatch",
+   "label": "Sender doesn't match who it claims to be",
+   "short": "Wrong sender",
+   "description": "The message claims to come from an organisation but was sent from a personal phone number.",
+   "weight": 0.45,
+   "color": "#9333EA",
+   "icon": "PHONELINK_ERASE",
+   "lesson": "Banks and couriers send SMS from their registered name (like 'MCB'), not from a random mobile number. A 'bank' texting from +230 5xxx xxxx is a strong red flag.",
+   "safe_action": "Ignore messages from personal numbers that claim to be an organisation.",
+   "examples": [
+    "'MCB ALERT' sent from +230 5821 4470"
+   ]
+  },
+  {
+   "id": "contact_switch",
+   "label": "Pushes you to another channel",
+   "short": "Call / chat",
+   "description": "Asking you to call a number or move to WhatsApp takes you away from official channels.",
+   "weight": 0.15,
+   "color": "#64748B",
+   "icon": "PHONE_FORWARDED",
+   "lesson": "Scammers give you their own 'hotline'. Use the number printed on your card instead.",
+   "safe_action": "Only call numbers you have looked up yourself.",
+   "examples": [
+    "call this number",
+    "WhatsApp us on"
+   ]
+  }
+ ],
+ "quiz": [
+  {
+   "id": "q1",
+   "message": "MCB: Your card has been blocked. Call 5821 4470 now and give the agent your card PIN to unblock it.",
+   "question": "What is the biggest red flag?",
+   "options": [
+    "The bank's name is mentioned",
+    "It asks for your PIN",
+    "It mentions your card"
+   ],
+   "answer": 1,
+   "explanation": "No bank ever asks for your PIN, by message or by phone. The number given is the scammer's, not the bank's."
+  },
+  {
+   "id": "q2",
+   "message": "Hi Dad, new number! Lost my phone. Can you send Rs 12,000 to this account? Need it today, will explain later.",
+   "question": "What should you do first?",
+   "options": [
+    "Send the money, it's urgent",
+    "Reply asking for the account name",
+    "Call your child on their old number"
+   ],
+   "answer": 2,
+   "explanation": "Call the number you already have. If they really lost their phone, a friend or family member can confirm it."
+  },
+  {
+   "id": "q3",
+   "message": "Invest Rs 10,000 today and receive Rs 40,000 in 7 days. 100% guaranteed, licensed trader.",
+   "question": "Why is this suspicious?",
+   "options": [
+    "Guaranteed high returns with no risk",
+    "The amount is in rupees",
+    "It mentions 7 days"
+   ],
+   "answer": 0,
+   "explanation": "Real investments always carry risk. Check any company with the FSC before investing."
+  },
+  {
+   "id": "q4",
+   "message": "Your parcel is waiting. Pay Rs 75 at https://bit.ly/parcel-mu to reschedule delivery.",
+   "question": "The amount is tiny. Is it safe to pay?",
+   "options": [
+    "Yes, it's only Rs 75",
+    "No, the goal is to steal your card details",
+    "Only if you're expecting a parcel"
+   ],
+   "answer": 1,
+   "explanation": "The small fee is bait. The page collects your card number and OTP, which lets scammers take much more."
+  },
+  {
+   "id": "q5",
+   "message": "MCB: Your OTP for the payment of Rs 850 at Winners is 553201. Never share this code with anyone.",
+   "question": "Is this message a scam?",
+   "options": [
+    "Yes, it contains an OTP",
+    "Probably not, if you just made this payment",
+    "Yes, it mentions a store"
+   ],
+   "answer": 1,
+   "explanation": "Genuine OTP messages tell you NOT to share the code and match a payment you just made. It only becomes risky if you didn't make that payment, or if someone asks you for the code."
+  }
+ ],
+ "directory": {
+  "_note": "Verified contact directory used for lookalike-domain detection and 'contact the official channel' advice. BEFORE THE DEMO: confirm every domain and fill in the official phone numbers from each organisation's website. Never take a number from a suspicious message.",
+  "organisations": [
+   {
+    "id": "mcb",
+    "name": "MCB (Mauritius Commercial Bank)",
+    "type": "bank",
+    "keywords": [
+     "mcb",
+     "mcbjuice",
+     "juice"
+    ],
+    "domains": [
+     "mcb.mu"
+    ],
+    "website": "https://www.mcb.mu",
+    "phone": null
+   },
+   {
+    "id": "sbm",
+    "name": "SBM Bank",
+    "type": "bank",
+    "keywords": [
+     "sbm",
+     "sbmgroup"
+    ],
+    "domains": [
+     "sbmgroup.mu"
+    ],
+    "website": "https://www.sbmgroup.mu",
+    "phone": null
+   },
+   {
+    "id": "absa",
+    "name": "Absa Bank (Mauritius)",
+    "type": "bank",
+    "keywords": [
+     "absa"
+    ],
+    "domains": [
+     "absa.mu"
+    ],
+    "website": "https://www.absa.mu",
+    "phone": null
+   },
+   {
+    "id": "maubank",
+    "name": "MauBank",
+    "type": "bank",
+    "keywords": [
+     "maubank"
+    ],
+    "domains": [
+     "maubank.mu"
+    ],
+    "website": "https://www.maubank.mu",
+    "phone": null
+   },
+   {
+    "id": "bom",
+    "name": "Bank of Mauritius",
+    "type": "regulator",
+    "keywords": [
+     "bank of mauritius",
+     "banque de maurice",
+     "bankofmauritius"
+    ],
+    "domains": [
+     "bom.mu"
+    ],
+    "website": "https://www.bom.mu",
+    "phone": null
+   },
+   {
+    "id": "fsc",
+    "name": "Financial Services Commission",
+    "type": "regulator",
+    "keywords": [
+     "financial services commission",
+     "fscmauritius"
+    ],
+    "domains": [
+     "fscmauritius.org"
+    ],
+    "website": "https://www.fscmauritius.org",
+    "phone": null
+   },
+   {
+    "id": "mra",
+    "name": "Mauritius Revenue Authority",
+    "type": "government",
+    "keywords": [
+     "mra",
+     "mauritius revenue authority"
+    ],
+    "domains": [
+     "mra.mu"
+    ],
+    "website": "https://www.mra.mu",
+    "phone": null
+   },
+   {
+    "id": "mupost",
+    "name": "Mauritius Post",
+    "type": "courier",
+    "keywords": [
+     "mauritius post",
+     "mauritiuspost",
+     "mupost",
+     "la poste"
+    ],
+    "domains": [
+     "mauritiuspost.mu"
+    ],
+    "website": "https://www.mauritiuspost.mu",
+    "phone": null
+   },
+   {
+    "id": "dhl",
+    "name": "DHL",
+    "type": "courier",
+    "keywords": [
+     "dhl"
+    ],
+    "domains": [
+     "dhl.com"
+    ],
+    "website": "https://www.dhl.com",
+    "phone": null
+   },
+   {
+    "id": "paypal",
+    "name": "PayPal",
+    "type": "payments",
+    "keywords": [
+     "paypal"
+    ],
+    "domains": [
+     "paypal.com"
+    ],
+    "website": "https://www.paypal.com",
+    "phone": null
+   }
+  ],
+  "reporting": [
+   {
+    "id": "maucors",
+    "name": "MAUCORS (Mauritian Cybercrime Online Reporting System)",
+    "website": "https://maucors.govmu.org",
+    "description": "Report online scams and fraud attempts."
+   }
+  ]
+ }
+}
