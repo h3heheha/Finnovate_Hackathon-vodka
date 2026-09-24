@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+.env
+.pytest_cache/
+build/
+dist/
+*.egg-info/
+.DS_Store
+mobile/storage/
+backend/data/cache/
+backend/data/runtime/
+backend/data/processed/
+backend/data/raw/
+backend/models/multilingual-e5-small/
+backend/models/phishing-url-detection/
+# Android Studio (FraudLens Shield)
+shield/**/build/
+shield/.gradle/
+shield/.idea/
+shield/local.properties
+*.apk
+*.keystore
+*.jks
