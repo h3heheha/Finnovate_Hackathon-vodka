@@ -23,3 +23,9 @@ shield/local.properties
 *.apk
 *.keystore
 *.jks
+
+.env
+__pycache__/
+*.pyc
+.venv/
+venv/
