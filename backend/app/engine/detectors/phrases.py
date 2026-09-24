@@ -37,7 +37,7 @@ _FR_CRED_VERBS = (r"(?:confirmer|confirmez|envoyer|envoyez|communiquer|communiqu
                   r"donnez|indiquer|indiquez|mettre à jour|valider|validez)")
 _FR_CRED_OBJECTS = (r"(?:code (?:otp|de v[ée]rification|secret|pin|de s[ée]curit[ée])|otp|mot de passe|"
                     r"coordonn[ée]es bancaires|num[ée]ro de carte|cvv|code pin|identifiants)")
-_MONEY = r"(?:rs\.?|mur|rupees?|roupies?|€|\$|usd|eur|usdt|money|fee|fees|amount|payment|cash)"
+_MONEY = r"(?:rs\.?|mur|rupees?|roupies?|roupi|€|\$|usd|eur|usdt|money|fee|fees|amount|payment|cash|kas|larzan)"
 
 RULES: list[Rule] = [
     # ---- Urgency ----------------------------------------------------------
@@ -54,6 +54,7 @@ RULES: list[Rule] = [
     _r("urgency", r"\b(?:sous|d'ici|dans les) \d+\s*(?:heures|h|minutes)\b"),
     _r("urgency", r"\baujourd['’]hui\b", weight=0.15),
     _r("urgency", r"\b(?:vit vit|zordi mem|aster mem|aster la)\b"),
+    _r("urgency", r"\b(?:urzan|depese|dan (?:\d+|enn|de) (?:minit|ler)|avan (?:aswar|minwi|dimin))\b"),
 
     # ---- Authority / impersonating an organisation ------------------------
     _r("authority", r"\b(?:dear|valued) (?:customer|client|user|member|account holder)\b",
@@ -77,6 +78,7 @@ RULES: list[Rule] = [
                  r"suspendue?s?|d[ée]sactiv[ée]e?s?|ferm[ée]e?s?)\b"),
     _r("threat", r"\b(?:poursuites?|amende|p[ée]nalit[ée])\b"),
     _r("threat", r"\b(?:pou (?:bloke|ferm)|finn bloke|pou gagn problem)\b"),
+    _r("threat", r"\b(?:kart|kont|konte)(?: labank)?\s+(?:finn|pou|inn|pe)\s+(?:bloke|expire|ferme|ferm|sispann|kanse)\b"),
 
     # ---- Secrecy -----------------------------------------------------------
     _r("secrecy", r"\b(?:don'?t|do not|dont|please don'?t)\s+(?:tell|inform|call|contact)\s+(?:anyone|anybody|"
@@ -102,6 +104,7 @@ RULES: list[Rule] = [
     _r("reward", r"\b(?:f[ée]licitations|vous avez (?:gagn[ée]|[ée]t[ée] s[ée]lectionn[ée]e?)|sans risque|"
                  r"rendement garanti|gagnant)\b"),
     _r("reward", r"\b(?:ou finn gagn[eé]?|loto|tiraz|kas gratis)\b"),
+    _r("reward", r"\b(?:felisitasion|felisitation|ou finn sorti gagnan|enn kado|gagn enn (?:kado|prix)|reponn wi)\b"),
 
     # ---- Payment request -----------------------------------------------
     _r("payment_request", rf"\b(?:pay|transfer|send|deposit|remit|settle|lend)\b[^.!?\n]{{0,25}}?{_MONEY}(?![a-z])",
@@ -114,6 +117,9 @@ RULES: list[Rule] = [
     _r("payment_request", r"\b(?:payez|r[ée]glez|virez|envoyez|transf[ée]rez)\b", negatable=True),
     _r("payment_request", r"\bfrais de (?:livraison|d[ée]douanement|traitement|dossier|lib[ée]ration)\b"),
     _r("payment_request", rf"\bavoy\b[^.!?\n]{{0,25}}?(?:{_MONEY}|kas|larzan)(?![a-z])"),
+    _r("payment_request", rf"\b(?:voy|avoy|prete|pret|transfer[eé]?|pey[eé]?)\s+(?:mwa|mw|nou|li)\b[^.!?\n]{{0,30}}?"
+                          rf"(?:{_MONEY}|\d)", negatable=True),
+    _r("payment_request", r"\b(?:ou kapav|eski ou kapav|to kapav) (?:prete|pret|avoy|voy|transfer)\b"),
 
     # ---- Credential request (strongest signal) ---------------------------
     _r("credential_request", rf"\b{_CRED_VERBS}\b[^.!?\n]{{0,40}}?\b{_CRED_OBJECTS}\b", negatable=True),
@@ -124,6 +130,8 @@ RULES: list[Rule] = [
        negatable=True),
     _r("credential_request", rf"\b{_FR_CRED_VERBS}\b[^.!?\n]{{0,40}}?\b{_FR_CRED_OBJECTS}", negatable=True),
     _r("credential_request", r"\b(?:avoy|donn)\b[^.!?\n]{0,25}?\b(?:kod|otp|pin|password)\b"),
+    _r("credential_request", r"\b(?:met|mete|rant|ranpli|konfirm[eé]?|verifye)\b[^.!?\n]{0,20}?\b(?:ou )?(?:detay|kod|"
+                             r"informasion|nimero kart|password|pin)\b"),
 
     # ---- Payment redirection ---------------------------------------------
     _r("payment_redirection", r"\b(?:new|different|updated|changed|alternative|another)\s+(?:bank\s+)?"
@@ -142,6 +150,8 @@ RULES: list[Rule] = [
     _r("impersonation_personal", r"\b(?:salut|coucou) (?:maman|papa|mamie|papi)\b"),
     _r("impersonation_personal", r"\b(?:c['’]est mon )?nouveau num[ée]ro\b|\bj['’]ai perdu mon t[ée]l[ée]phone\b"),
     _r("impersonation_personal", r"\b(?:mo )?nouvo nimero\b|\bmo finn perdi mo (?:portab|telefonn)\b"),
+    _r("impersonation_personal", r"\bmo (?:telefonn|portab) (?:finn )?(?:tonbe|tombe|kase|perdi|gate)\b|"
+                                 r"\bse mwa (?:ou )?(?:garson|tifi|zanfan|frer|ser)\b|\bmo dan (?:problem|traka)\b"),
 
     # ---- Unusual payment method ---------------------------------------
     _r("unusual_payment", r"\b(?:usdt|bitcoin|btc|ethereum|crypto(?:currency|currencies)?|binance|tether|"
@@ -153,6 +163,7 @@ RULES: list[Rule] = [
     _r("contact_switch", r"\b(?:call|contact|whatsapp|text|message|ring)\s+(?:us|me|our agent|this number|the number|"
                          r"our hotline)\b"),
     _r("contact_switch", r"\b(?:appelez|contactez)(?:-nous| le)\b|\bsonn lor\b"),
+    _r("suspicious_link", r"\bklik (?:lor|isi|la|sa)\b", weight=0.1),
     _r("suspicious_link", r"\bclick (?:here|the link|below|this link)\b", weight=0.1),
 ]
 

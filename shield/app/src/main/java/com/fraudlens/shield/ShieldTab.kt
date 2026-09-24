@@ -56,6 +56,7 @@ class ShieldTab(app: MainActivity) : Tab(app) {
             "when FraudLens is closed.", "Protection"))
         content.add(hero(s), t = 18)
         content.add(setup(s), t = T.GAP)
+        content.add(activity(), t = T.GAP)
         content.add(tryIt(), t = T.GAP)
         content.add(recent(), t = T.GAP)
         content.add(howItWorks(), t = T.GAP)
@@ -99,6 +100,61 @@ class ShieldTab(app: MainActivity) : Tab(app) {
         }
         card.add(K.divider(ctx), t = 14)
         card.add(sw, t = 6)
+        val prefs = Prefs(ctx)
+        val demo = Switch(ctx).apply {
+            text = "Check every message (demo mode)"
+            textSize = 14f
+            typeface = T.font(ctx, 500)
+            setTextColor(T.TEXT)
+            isChecked = prefs.checkEverything
+            val states = arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf())
+            thumbTintList = ColorStateList(states, intArrayOf(T.SAFE, T.MUTED))
+            trackTintList = ColorStateList(states, intArrayOf(T.tint(T.SAFE, 0.45f), T.SURFACE_2))
+            setOnCheckedChangeListener { _, on ->
+                prefs.checkEverything = on
+                app.snack(if (on) "Demo mode: every message from SMS, WhatsApp and email apps is checked by the server."
+                          else "Normal mode: ordinary chats stay on the phone.")
+            }
+        }
+        card.add(demo, t = 4)
+        card.add(K.caption(ctx, "Normally only messages with links, numbers, amounts or pressure words (English, French, " +
+            "Kreol) are sent for checking. Turn this on during a demo so nothing is missed.", 12f), t = 2)
+        return card
+    }
+
+    // ---- what Shield saw (on this phone only) -------------------------------------------------------------
+    private fun activity(): View {
+        val prefs = Prefs(ctx)
+        val log = prefs.shieldLog()
+        val card = K.card(ctx)
+        card.add(K.sectionTitle(ctx, "What Shield saw",
+            if (log.isEmpty()) "Nothing yet. Send yourself a test SMS, WhatsApp or email: each one appears here."
+            else "Messages and calls Shield noticed, newest first. Kept on this phone only.", "RADAR"))
+        val fmt = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault())
+        for (e in log.take(8)) {
+            val decision = e.optString("decision")
+            val color = when (decision) {
+                "Warned" -> T.FRAUD_TEXT
+                "Checked" -> T.SAFE_TEXT
+                "Error" -> T.WARN
+                else -> T.MUTED
+            }
+            val row = K.row(ctx, Gravity.TOP)
+            row.setPadding(0, K.dp(ctx, 10), 0, 0)
+            row.add(K.mono(ctx, fmt.format(java.util.Date(e.optLong("time"))), 11f, T.MUTED), K.WRAP, K.WRAP, r = 10, t = 2)
+            val t = K.col(ctx)
+            val top = K.row(ctx)
+            top.add(K.text(ctx, e.optString("app"), 13.5f, 600, maxLines = 1), 0, K.WRAP, 1f)
+            top.add(K.pill(ctx, decision.uppercase(), color, size = 10f), K.WRAP, K.WRAP, l = 6)
+            t.add(top)
+            t.add(K.caption(ctx, e.optString("detail"), 12f), t = 2)
+            row.add(t, 0, K.WRAP, 1f)
+            card.add(row)
+        }
+        if (log.isNotEmpty()) {
+            card.add(K.button(ctx, "Clear", K.Style.LINK, "DELETE_OUTLINE") { prefs.clearLog(); render() },
+                K.WRAP, K.WRAP, t = 6)
+        }
         return card
     }
 
@@ -146,6 +202,8 @@ class ShieldTab(app: MainActivity) : Tab(app) {
             "Choose FraudLens → \"Unrestricted\" so the phone never stops Shield.", null) {
             app.startSafely(Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS))
         })
+        card.add(K.caption(ctx, "Tip: don't swipe FraudLens away in Recents. On Xiaomi, Oppo, Vivo or Huawei phones also " +
+            "allow \"Autostart\" for FraudLens, so Shield keeps working in the background.", 12f), t = 12)
         return card
     }
 
@@ -204,8 +262,8 @@ class ShieldTab(app: MainActivity) : Tab(app) {
             val res = r.getOrNull()
             when {
                 res == null -> app.snack(friendlyError(r.exceptionOrNull()))
-                res.optString("risk_level") == "low" ->
-                    app.snack("Caller check works: ${res.optString("headline")}. Send the test scam alert first to make this number known.")
+                !Alerts.callWorthWarning(res) ->
+                    app.snack("Caller check works: no warning for this number. Send the test scam alert first to make it known.")
                 else -> { Alerts.showCallAlert(appCtx, SAMPLE_SENDER, res); render() }
             }
         }

@@ -27,6 +27,11 @@ class Prefs(context: Context) {
         get() = sp.getBoolean("call_check_on", true)
         set(v) = sp.edit().putBoolean("call_check_on", v).apply()
 
+    /** Demo mode: send every message from watched apps to the server, not only the ones the quick filter picks. */
+    var checkEverything: Boolean
+        get() = sp.getBoolean("check_everything", true)
+        set(v) = sp.edit().putBoolean("check_everything", v).apply()
+
     /** Trusted person for "Ask someone you trust" (set in Settings). */
     var guardianName: String
         get() = sp.getString("guardian_name", "") ?: ""
@@ -57,6 +62,14 @@ class Prefs(context: Context) {
     fun addAlert(alert: JSONObject) = prepend("alerts", alert, MAX_ALERTS)
 
     fun clearAlerts() = sp.edit().putString("alerts", "[]").apply()
+
+    // ---- what Shield saw (on this phone only; helps check that WhatsApp, email and calls are reaching it) ----
+    fun shieldLog(): List<JSONObject> = readList("shield_log")
+
+    fun log(app: String, decision: String, detail: String) = prepend("shield_log", JSONObject()
+        .put("time", System.currentTimeMillis()).put("app", app).put("decision", decision).put("detail", detail), MAX_LOG)
+
+    fun clearLog() = sp.edit().putString("shield_log", "[]").apply()
 
     // ---- your own checks (Scan tab) -------------------------------------------------------------------
     fun scans(): List<JSONObject> = readList("scans")
@@ -108,6 +121,7 @@ class Prefs(context: Context) {
         const val DEFAULT_SERVER = "http://10.0.2.2:8000"
         const val MAX_ALERTS = 30
         const val MAX_SCANS = 30
+        const val MAX_LOG = 20
 
         /** Accepts "192.168.1.5:8000" or "http://192.168.1.5:8000/" and returns "http://192.168.1.5:8000". */
         fun normaliseUrl(v: String): String {

@@ -20,6 +20,22 @@ def _level(score: float, community: int) -> str:
     return "low"
 
 
+# A warning while the phone rings must be rare and right: most unknown callers are genuine.
+# Lookup services alone ("flag", "risky", foreign number, odd format) are shown as reasons but never
+# raise the level; FraudLens user reports, fraud-linked numbers and VoIP / premium-rate lines do.
+_CALL_WARNINGS = {"Internet (VoIP) number", "Premium-rate number"}
+
+
+def _call_level(findings: list, community: int) -> str:
+    fraud_linked = any(f.severity == "danger" and f.source == "IPQualityScore" for f in findings)
+    danger = any(f.severity == "danger" for f in findings)
+    if community >= 2 or fraud_linked or (danger and community >= 1):
+        return "high"
+    if community >= 1 or danger or any(f.severity == "warning" and f.title in _CALL_WARNINGS for f in findings):
+        return "medium"
+    return "low"
+
+
 @router.get("/status", summary="Which providers are configured and today's paid-lookup usage")
 async def status(intel=Depends(get_intel)) -> dict:
     return intel.status() if intel else {"enabled": False}
@@ -42,7 +58,7 @@ async def check_phone(number: str = Query(..., min_length=5, max_length=30), int
     if intel is not None:
         report = await intel.check([], [number], check_phones=True)
     score = report.score if report else 0.0
-    level = _level(score, community)
+    level = _call_level(report.findings if report else [], community)
     headline = {"high": "Likely scam caller", "medium": "Be careful with this caller",
                 "low": "No warning signs for this number"}[level]
     reasons = [f["title"] + ": " + f["detail"] for f in (report.public()["findings"] if report else [])]

@@ -84,6 +84,13 @@ class MainActivity : Activity() {
     override fun onResume() {
         super.onResume()
         tabs[current]?.onShow()   // permissions may have changed in Settings; History may have new alerts
+        // Make sure Shield's listener is connected (some phones drop it after an update or a battery clean-up).
+        if (ShieldStatus.listenerEnabled(this)) {
+            try {
+                android.service.notification.NotificationListenerService.requestRebind(
+                    android.content.ComponentName(this, ShieldNotificationListener::class.java))
+            } catch (e: Exception) { /* not allowed right now: Android will reconnect it itself */ }
+        }
         paintDock()
         if (Repo.online == false && Repo.secondsSinceRefresh() > 20) Repo.refresh(this)  // server may have started
     }

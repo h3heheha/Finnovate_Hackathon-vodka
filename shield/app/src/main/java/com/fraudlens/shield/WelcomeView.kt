@@ -32,13 +32,15 @@ class PulseView(ctx: Context) : View(ctx) {
     override fun onDraw(canvas: Canvas) {
         val cx = width / 2f
         val cy = height / 2f
+        // Sized to the view, so the biggest ring never gets cut off at the top or bottom.
+        val outer = minOf(width, height) / 2f / 1.22f
         glow.color = T.tint(T.SAFE, 0.10f)
-        canvas.drawCircle(cx, cy, K.dpf(context, 60) * (0.9f + 0.35f * phase), glow)
+        canvas.drawCircle(cx, cy, outer * 0.57f * (0.9f + 0.35f * phase), glow)
         ring.strokeWidth = K.dpf(context, 1)
-        listOf(105f to 0.18f, 75f to 0.30f, 48f to 0.5f).forEachIndexed { i, (r, a) ->
+        listOf(1f to 0.18f, 0.71f to 0.30f, 0.46f to 0.5f).forEachIndexed { i, (r, a) ->
             val scale = 1f + (0.12f + i * 0.04f) * phase
             ring.color = T.tint(T.SAFE, a * (1f - 0.65f * phase))
-            canvas.drawCircle(cx, cy, K.dpf(context, r) * scale, ring)
+            canvas.drawCircle(cx, cy, outer * r * scale, ring)
         }
     }
 }
@@ -67,12 +69,18 @@ class WelcomeView(private val ctx: Context, private val onStart: () -> Unit) : F
 
     init {
         isClickable = true  // nothing underneath reacts while the landing screen is up
-        background = GradientDrawable().apply {
-            gradientType = GradientDrawable.RADIAL_GRADIENT
-            colors = intArrayOf(T.tint(T.SAFE, 0.08f), T.BG)
-            setGradientCenter(0.5f, 0.2f)
-            gradientRadius = K.dpf(ctx, 420)
-        }
+        isFocusable = true
+        // Solid slate first, then the soft emerald glow on top: the app underneath must never show through.
+        background = android.graphics.drawable.LayerDrawable(arrayOf(
+            android.graphics.drawable.ColorDrawable(T.BG),
+            GradientDrawable().apply {
+                gradientType = GradientDrawable.RADIAL_GRADIENT
+                colors = intArrayOf(T.tint(T.SAFE, 0.10f), T.tint(T.SAFE, 0f))
+                setGradientCenter(0.5f, 0.22f)
+                gradientRadius = K.dpf(ctx, 380)
+            },
+        ))
+        elevation = K.dpf(ctx, 24)   // above the dock and everything else
         val scroll = ScrollView(ctx).apply { isVerticalScrollBarEnabled = false; isFillViewport = true }
         val content = K.col(ctx)
         content.setPadding(K.dp(ctx, 20), K.dp(ctx, 16), K.dp(ctx, 20), K.dp(ctx, 12))

@@ -201,7 +201,8 @@ In WhatsApp or Messages, long-press a message → **Share** → **FraudLens**. F
 | No call warning | Setup step 4 must show ✅ (Android 10+). Numbers saved in Contacts are not screened. Do the "make the number known" steps first. |
 | Build error `Unresolved reference` / wrong package | `namespace` and `applicationId` in `build.gradle.kts (Module :app)` must be `com.fraudlens.shield`. Every `.kt` file must sit in `java/com/fraudlens/shield/`. |
 | "Clipboard is empty" | Copy the message first (long-press → Copy). Or share it to FraudLens instead. |
-| Want to see what Shield is doing | **Logcat** tab, filter `FraudLensShield`. |
+| Want to see what Shield is doing | **Shield tab → What Shield saw** on the phone (Warned / Checked / Skipped / Error for each message and call). Or Android Studio's **Logcat**, filter `FraudLensShield`. |
+| WhatsApp or email not checked | Check **What Shield saw**. If nothing appears, the app didn't post a notification (chat open, Gmail Spam/Promotions tab). If it says Skipped, turn on **Check every message (demo mode)** in the Shield tab. |
 | A screen looks wrong or a button does nothing | Take a screenshot (Power + Volume down) and send it. The app is built in code, so fixes are quick. |
 
 ## Why it is built this way (for the pitch)

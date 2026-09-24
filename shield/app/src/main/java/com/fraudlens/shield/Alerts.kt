@@ -80,6 +80,23 @@ object Alerts {
 
     fun canOverlay(ctx: Context): Boolean = Settings.canDrawOverlays(ctx)
 
+    /**
+     * Should a ringing call trigger a warning? Only on real evidence: "high", or "medium" backed by FraudLens
+     * user reports or a VoIP / premium-rate line. A lookup service's vague "risky" alone never warns,
+     * because most unknown callers are genuine.
+     */
+    fun callWorthWarning(result: JSONObject): Boolean {
+        val level = result.optString("risk_level", "low")
+        if (level == "high") return true
+        if (level != "medium") return false
+        if (result.optInt("community_reports") >= 1) return true
+        val findings = result.optJSONArray("findings") ?: return false
+        return (0 until findings.length()).any {
+            val t = findings.optJSONObject(it)?.optString("title") ?: ""
+            t == "Internet (VoIP) number" || t == "Premium-rate number"
+        }
+    }
+
     fun detailIntent(ctx: Context, alert: JSONObject): Intent =
         Intent(ctx, DetailActivity::class.java)
             .putExtra(DetailActivity.EXTRA_ALERT, alert.toString())

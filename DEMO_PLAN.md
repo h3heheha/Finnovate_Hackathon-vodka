@@ -66,7 +66,8 @@ What's where: **one app on the phone, one server on the laptop.**
 ## Phase 4: Rehearsal checklist (tick every line)
 
 ### Shield: the phone reacts on its own
-Stay on the home screen, not inside a chat.
+Stay on the home screen, not inside a chat. For the demo, turn on **Shield tab → Check every message (demo mode)**.
+After each test, **Shield tab → What Shield saw** shows what happened (Warned / Checked / Skipped / Error).
 
 - [ ] **A1 SMS** from your friend: *"MCB: Your card has been blocked due to suspicious activity. Confirm your details within 24h: https://bit.ly/mcb-verify-now . Do not share this message."*
   - Expect: a notification and red banner. Tap **See why** for the Scam X-Ray, then **Report as scam**.
@@ -74,8 +75,8 @@ Stay on the home screen, not inside a chat.
   - Expect: a warning.
 - [ ] **A3 Email to your Gmail:** subject "Parcel held", body *"Pay the Rs 95 customs fee today: http://mauritius-post-colis.top/pay"*
   - Expect: a warning.
-- [ ] **A4 Genuine SMS:** *"Your Juice verification code is 482915. Never share this code with anyone."*
-  - Expect: **no alert.**
+- [ ] **A4 Genuine SMS:** *"MCB: Your OTP for the online payment of Rs 1,250.00 at DARTY is 482913. Never share this code with anyone, including MCB staff."*
+  - Expect: **no alert.** (A bare "your code is 482915" from a personal mobile number *is* suspicious, so FraudLens flags that one.)
 - [ ] **A5 Chat:** *"See you at 7 for dinner?"*
   - Expect: nothing (it's filtered on the phone and never sent anywhere).
 - [ ] **A6 Friend calls you** after A1 and A2:
@@ -135,8 +136,8 @@ Stay on the home screen, not inside a chat.
 |---|---|
 | Chip says OFFLINE DEMO | Same as the next row. Tap the chip → fix the address → **Save & test**. |
 | Shield: "Can't reach server" | The laptop IP changed (run `ipconfig` again), the server isn't running, or the firewall isn't allowing Python on private networks. |
-| No message warning | Notification access is off, you're inside the chat, the same text was sent within the last 10 minutes, or Messages spam protection hid it. |
-| No call warning | The caller role isn't set, the caller is a saved contact, or **the server restarted** (reputations reset). Redo A1 and A2. |
+| No message warning | Look at **Shield tab → What Shield saw**. Nothing listed: the app posted no notification (you were inside the chat, Gmail put the email in Spam/Promotions, or Messages spam protection hid it), or notification access is off. "Skipped": turn on demo mode. "Error": check the server address. |
+| No call warning | The caller role isn't set, the caller is a saved contact, or **the server restarted** (reputations reset). Redo A1 and A2. Unknown callers are only flagged on real evidence (FraudLens reports, fraud-linked, VoIP or premium-rate numbers). |
 | "Clipboard is empty" | Copy the message first (long-press → Copy), or share it to FraudLens instead. |
 | "Too many checks from this device" | The rate limit was hit during rapid testing. Wait 1 minute, or raise `FRAUDLENS_RATE_LIMIT_PER_MINUTE`. |
 | A screen looks wrong | Swipe FraudLens away in Recents and reopen it. Fallback: run the demo from the laptop at `http://localhost:8000/`. |
