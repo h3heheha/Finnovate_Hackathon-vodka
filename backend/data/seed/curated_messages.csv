@@ -1,0 +1,77 @@
+text,label,lang,category,source
+"MCB: Unusual login detected on your Internet Banking. Confirm your details within 24h to avoid suspension: https://mcb-login-secure.net",scam,en,bank_impersonation,curated
+"Dear customer, your SBM card has been blocked for security reasons. Call our fraud team on 5 729 1184 and provide your card number and PIN to reactivate.",scam,en,bank_impersonation,curated
+"ABSA Security: we noticed a payment of Rs 24,999 you did not authorise. If this wasn't you, send us the OTP you just received to cancel it.",scam,en,bank_impersonation,curated
+"Your MauBank account will be closed today due to incomplete KYC. Update now at maubank-kyc-update.com or visit a branch with a fine of Rs 5,000.",scam,en,bank_impersonation,curated
+"Bank of Mauritius notice: your savings are at risk. Transfer your balance to the protected account 000712334561 until the investigation is completed.",scam,en,bank_impersonation,curated
+"MRA: You are eligible for a tax refund of Rs 7,450. Submit your bank details here to receive it: http://mra-refund.info/claim",scam,en,bank_impersonation,curated
+"Hello this is Kevin from the bank security department. Someone is trying to access your account. Please read me the 6 digit code we just sent so I can stop the transaction.",scam,en,bank_impersonation,curated
+"Juice alert: your wallet has been limited. Reactivate within 2 hours by entering your PIN on juice-verify.online",scam,en,bank_impersonation,curated
+"Mauritius Post: we tried to deliver your package but the address was incomplete. Pay Rs 45 redelivery fee: https://tinyurl.com/mupost-redeliver",scam,en,parcel_fee,curated
+"DHL: Your shipment is on hold at customs. A clearance fee of Rs 1,250 must be paid today or it will be returned. Pay here: dhl-customs-pay.com",scam,en,parcel_fee,curated
+"Your parcel from Shein could not be delivered. Confirm your card details to reschedule: bit.ly/parcel-mu",scam,en,parcel_fee,curated
+"Customs Department: an international parcel in your name contains undeclared items. Pay Rs 8,500 duty immediately to avoid legal action.",scam,en,parcel_fee,curated
+"Hi Dad, my phone broke so this is my new number. Can you send me Rs 9,000 for my rent today? I'll explain later, don't call I can't talk.",scam,en,family_emergency,curated
+"Mum it's me, I'm using a friend's phone. I'm in trouble and need Rs 15,000 urgently. Please send it to this account 000583221907 and don't tell anyone.",scam,en,family_emergency,curated
+"Hi Auntie, it's Priya on a new WhatsApp. I need a small favour, can you transfer Rs 4,500 for my exam fees? I'll pay you back on Friday.",scam,en,family_emergency,curated
+"Grandma, I had an accident with the car and the police say I must pay a fine now or I stay in the cell. Please send money quickly and keep it between us.",scam,en,family_emergency,curated
+"Earn Rs 3,000 per day from home! Just like and review hotels online. Registration fee Rs 500. Contact our HR on WhatsApp.",scam,en,job,curated
+"Congratulations, your CV was selected for a hotel job in Canada. Salary 4,000 USD per month. Pay Rs 12,000 for visa processing to secure your place.",scam,en,job,curated
+"Part-time task job: complete simple tasks on our app and earn commission. Deposit 100 USDT to unlock higher paying tasks.",scam,en,job,curated
+"Invest Rs 10,000 today and receive Rs 45,000 in 7 days. 100% guaranteed by our licensed forex traders. Only 5 places left!",scam,en,investment,curated
+"Join our VIP Bitcoin signals group. Our members doubled their money last month. Start with 200 USDT, withdrawals anytime.",scam,en,investment,curated
+"Hi, I'm Emma, an investment advisor. I found your number by mistake but I can show you how I make 20% per week trading gold. Interested?",scam,en,investment,curated
+"Your crypto wallet has a pending withdrawal of 3,200 USDT. Pay the 150 USDT release fee to receive your funds.",scam,en,investment,curated
+"Congratulations! Your number won Rs 500,000 in the Loto Vert draw. To claim, send Rs 2,500 processing fee and your ID copy.",scam,en,prize,curated
+"You have been selected as the lucky winner of an iPhone 16. Pay only the delivery fee of Rs 199 at claim-prize-mu.xyz",scam,en,prize,curated
+"Amazon: your account won a Rs 20,000 gift card. Buy a Google Play card of Rs 1,000 and send us the code to activate your prize.",scam,en,prize,curated
+"CEB: your electricity will be disconnected tonight due to an unpaid bill of Rs 3,480. Pay immediately via this link to avoid disconnection: ceb-pay.site",scam,en,bank_impersonation,curated
+"Mauritius Telecom: your line will be suspended in 24 hours. Settle your bill by sending Rs 1,200 to Juice number 5 812 9043.",scam,en,bank_impersonation,curated
+"Police notice: a warrant has been issued in your name for cyber fraud. Call Inspector Ramen on 5 901 2210 immediately and pay the bail to avoid arrest.",scam,en,generic,curated
+"Our company changed banks. Please pay the attached invoice to our new account MU17BOMM0101101030300200000MUR from today.",scam,en,generic,curated
+"Cher client MCB, votre carte a été suspendue. Veuillez confirmer vos informations et votre code secret sur mcb-securite.com",scam,fr,bank_impersonation,curated
+"SBM: une transaction suspecte de Rs 18 000 a été détectée. Communiquez le code OTP reçu à notre agent pour l'annuler.",scam,fr,bank_impersonation,curated
+"La Poste: votre colis est en attente. Des frais de livraison de Rs 60 sont à régler aujourd'hui : https://bit.ly/colis-mu",scam,fr,parcel_fee,curated
+"Douane: votre colis contient des articles non déclarés. Payez Rs 6 500 immédiatement pour éviter des poursuites.",scam,fr,parcel_fee,curated
+"Salut maman, c'est moi, j'ai perdu mon téléphone. C'est mon nouveau numéro. Peux-tu me virer Rs 12 000 aujourd'hui ? Ne dis rien à papa.",scam,fr,family_emergency,curated
+"Félicitations ! Vous avez gagné Rs 250 000. Pour recevoir votre prix, envoyez Rs 3 000 de frais de dossier.",scam,fr,prize,curated
+"Investissez Rs 5 000 et gagnez 30% par semaine. Rendement garanti, sans risque. Places limitées !",scam,fr,investment,curated
+"Offre d'emploi : gagnez Rs 2 500 par jour depuis chez vous. Frais d'inscription de Rs 400 à payer avant ce soir.",scam,fr,job,curated
+"Bonzour, ou kont MCB pou bloke zordi. Avoy ou kod OTP pou nou kapav debloke li vit vit.",scam,mfe,bank_impersonation,curated
+"Mama, mo finn perdi mo portab. Sa mo nouvo nimero. Avoy Rs 8,000 lor sa kont la zordi mem, pa dir papa.",scam,mfe,family_emergency,curated
+"Felisitasion! Ou finn gagne Rs 100,000 dan loto. Avoy Rs 2,000 fre pou resevwar ou kas.",scam,mfe,prize,curated
+"Ou koli pe atann ou lapos. Pey Rs 75 zordi lor sa lien la sinon nou pou retourn li: bit.ly/koli-mu",scam,mfe,parcel_fee,curated
+"Travay depi lakaz, gagn Rs 2,000 par zour. Avoy Rs 500 pou enskri. Pa rat sa sans la!",scam,mfe,job,curated
+"MCB: Your OTP for the payment of Rs 3,150.00 at Winners is 628104. Never share this code with anyone.",legit,en,none,curated
+"SBM: Rs 12,500.00 has been credited to your account ending 4410 on 22/09. Available balance available in the SBM app.",legit,en,none,curated
+"Your MCB Juice transfer of Rs 500 to PRIYA R. was successful. Ref 88213.",legit,en,none,curated
+"ABSA: your card ending 2231 was used for Rs 850.00 at SUPER U. If you don't recognise this, call the number on the back of your card.",legit,en,none,curated
+"Mauritius Post: your parcel RB1234567MU is ready for collection at Port Louis Post Office. Bring your ID card.",legit,en,none,curated
+"CEB: your bill of Rs 1,845 is due on 30/09. Pay at any CEB office or through your usual banking app.",legit,en,none,curated
+"Hi Mum, I'll be home late tonight, training finished at 8. Can you keep some dinner for me?",legit,en,none,curated
+"Dad, don't forget the parent-teacher meeting tomorrow at 2pm at school.",legit,en,none,curated
+"Hey, are we still meeting at Bagatelle on Saturday? I'll bring the book you lent me.",legit,en,none,curated
+"Reminder: your dentist appointment is on Thursday 26 Sept at 10:30. Reply C to confirm.",legit,en,none,curated
+"Thanks for the transfer, I received the Rs 2,000 for the group gift. See you at the party!",legit,en,none,curated
+"Team, the meeting is moved to 3pm in room B. Please bring the Q3 figures.",legit,en,none,curated
+"Your Uber Eats order is on its way. Estimated arrival 19:45.",legit,en,none,curated
+"Emtel: Your recharge of Rs 200 was successful. New balance Rs 215.40.",legit,en,none,curated
+"MRA: Your income tax return for 2025-2026 has been received. Thank you.",legit,en,none,curated
+"Hi, this is Anjali from HR. Your contract is ready to sign, please come to the office on Monday morning.",legit,en,none,curated
+"Your MauBank statement for August is now available in the MauBank app.",legit,en,none,curated
+"Can you send me the photos from yesterday? The ones at the beach were really nice.",legit,en,none,curated
+"Pharmacy: your prescription is ready for pickup. Opening hours 8am-7pm.",legit,en,none,curated
+"Happy birthday! Have a wonderful day, let's celebrate at the weekend.",legit,en,none,curated
+"The plumber will come tomorrow between 9 and 11. Please leave the gate open.",legit,en,none,curated
+"DHL Express: your shipment 4829103345 will be delivered today between 10:00 and 14:00.",legit,en,none,curated
+"MCB : votre code OTP pour le paiement de Rs 1 200 chez Intermart est 553901. Ne le communiquez jamais.",legit,fr,none,curated
+"Bonjour, la réunion de parents aura lieu vendredi à 17h. Merci de confirmer votre présence.",legit,fr,none,curated
+"Salut ! On se retrouve à 19h au restaurant ? J'ai réservé une table pour quatre.",legit,fr,none,curated
+"Votre commande a été expédiée. Suivi disponible dans l'application.",legit,fr,none,curated
+"Maman, je suis bien arrivée à l'école. Je t'appelle ce soir.",legit,fr,none,curated
+"Rappel : votre rendez-vous chez le médecin est demain à 9h30.",legit,fr,none,curated
+"Bonzour, to pe vini ce soir pou manze? Mo'nn fer enn kari poul.",legit,mfe,none,curated
+"Mo finn arive lakaz. Mersi pou transpor la.",legit,mfe,none,curated
+"Pa bliye aste dipin lor to sime retour.",legit,mfe,none,curated
+"Demin nou al lamer, to vini? Nou kit lakaz 8er.",legit,mfe,none,curated
+"Papa, mo pou reste lekol pou lantrenman ziska 6er.",legit,mfe,none,curated
