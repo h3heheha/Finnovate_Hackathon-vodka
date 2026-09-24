@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#121417</color>
+    <!-- Clean Dark Slate (same tokens as Theme.kt and mobile/DESIGN_SPEC.md) -->
+    <color name="fl_bg">#121417</color>
+    <color name="fl_surface">#1C1E23</color>
+    <color name="fl_text">#F3F4F6</color>
+    <color name="fl_muted">#8E95A2</color>
+    <color name="fl_safe">#10B981</color>
+</resources>
