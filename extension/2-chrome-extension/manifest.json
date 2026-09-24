@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "FraudLens Guard",
+  "short_name": "FraudLens",
+  "version": "2.0.0",
+  "description": "Spot the warning signs before you pay: Scam X-Ray for messages, link checks, look-alike site warnings and Pause-Before-Pay.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwXuAHd4ZivctuHPsUbHBNYy887imSpvwebTtggQFd9iFEOtEvTpOre32fxCCoRjzXpLM4fjYt/8la5VWLW5aGN/mCCBkddgDMMwFRSoqCs8mcSLqofs5qI8FnmXMbNvZQK4WuvUmRD0ZK2Z3ocYKiPhySSS9cfhyddG9wPbXGoDHgsTk9a7qoExHKLxhlmmfED3jiSblUmkPkys/hcmEfvDG4l+n4OPAioGYgaGDcyK5G+LDyw/XFP0ohDNyuXvoa40p316RxQsX+cDGFUkwkpvVO0vWhcfMHXihYPl5M1pyjoMcXt3CcbiqQYoRwc4Mq6YotXTOmBleZodgdk9khwIDAQAB",
+  "minimum_chrome_version": "116",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "FraudLens: open the verdict panel",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel/sidepanel.html"
+  },
+  "permissions": [
+    "storage",
+    "contextMenus",
+    "sidePanel",
+    "activeTab",
+    "scripting",
+    "alarms"
+  ],
+  "host_permissions": [
+    "http://127.0.0.1:8000/*",
+    "http://localhost:8000/*"
+  ],
+  "optional_host_permissions": [
+    "https://mail.google.com/*",
+    "https://outlook.live.com/*",
+    "https://outlook.office.com/*",
+    "https://web.whatsapp.com/*",
+    "http://localhost/*",
+    "http://*.localhost/*",
+    "https://*/*",
+    "<all_urls>"
+  ],
+  "incognito": "not_allowed",
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"
+  }
+}

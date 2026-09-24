@@ -1,0 +1,41 @@
+# Render Blueprint: one free web service built from ./Dockerfile.
+# Render reads this file when you click New -> Blueprint and pick this GitHub repository.
+# Keys marked "sync: false" are asked for once, in the Render dashboard. Leave any you don't have empty.
+services:
+  - type: web
+    name: fraudlens
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      # Signs the extension's install tokens / salts hashed identifiers: random, made by Render.
+      - key: FRAUDLENS_INSTALL_SECRET
+        generateValue: true
+      - key: FRAUDLENS_HASH_SALT
+        generateValue: true
+      - key: FRAUDLENS_REQUIRE_INSTALL_TOKEN
+        value: "true"
+      - key: FRAUDLENS_REPORT_CONFIRMATIONS
+        value: "1"
+      # --- free API keys (all optional) ---
+      - key: FRAUDLENS_SAFE_BROWSING_KEY
+        sync: false
+      - key: FRAUDLENS_URLHAUS_KEY
+        sync: false
+      - key: FRAUDLENS_VIRUSTOTAL_KEY
+        sync: false
+      - key: FRAUDLENS_GROQ_API_KEY
+        sync: false
+      # --- optional extras ---
+      - key: FRAUDLENS_GEMINI_API_KEY
+        sync: false
+      - key: FRAUDLENS_TELESIGN_CUSTOMER_ID
+        sync: false
+      - key: FRAUDLENS_TELESIGN_API_KEY
+        sync: false
+      - key: FRAUDLENS_IPQS_KEY
+        sync: false

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Account verification (FraudLens practice page)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ body { font: 15px/1.5 system-ui, sans-serif; background:#f4f4f4; margin:0; }
+ .test { background:#fff3cd; color:#5c4400; padding:8px 16px; font-size:13px; }
+ form { max-width: 380px; margin: 40px auto; background:#fff; padding:24px; border-radius:12px; box-shadow:0 2px 8px rgba(0,0,0,.1); }
+ label { display:block; margin-top:12px; font-size:13px; color:#444; }
+ input { width:100%; padding:9px; border:1px solid #ccc; border-radius:6px; font:inherit; box-sizing:border-box; }
+ button { margin-top:18px; width:100%; padding:10px; border:0; border-radius:6px; background:#b71c1c; color:#fff; font-weight:700; }
+</style></head>
+<body>
+<div class="test">FraudLens PRACTICE PAGE: an imitation "verify your account" scam page. It sends nothing anywhere. <a href="./">All practice pages</a></div>
+<form id="f" action="javascript:void(0)">
+  <h2>Verify your account</h2>
+  <p>Your card has been blocked. Confirm your details to unlock it.</p>
+  <label for="user">Username</label><input id="user" name="username" autocomplete="username">
+  <label for="pw">Password</label><input id="pw" name="password" type="password" autocomplete="current-password">
+  <label for="card">Card number</label><input id="card" name="cardnumber" autocomplete="cc-number" inputmode="numeric">
+  <label for="otp">One-time code (OTP)</label><input id="otp" name="otp" autocomplete="one-time-code">
+  <button type="submit">Unlock my card</button>
+  <p id="out"></p>
+</form>
+</body></html>

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Attack page (FraudLens practice page)</title>
+<style>
+ body { font: 15px/1.5 system-ui, sans-serif; margin: 0; background:#fafafa; }
+ .test { background:#fff3cd; color:#5c4400; padding:8px 16px; font-size:13px; }
+ main { max-width: 820px; margin: 16px auto; padding: 0 16px; }
+ .mail { background:#fff; border-radius:10px; padding:14px 16px; margin:12px 0; }
+ .fake { background:#e8f5e9; border-left:6px solid #2e7d32; padding:10px 14px; border-radius:8px; font-weight:700; color:#1b5e20; }
+ pre { background:#222; color:#bdf; padding:10px; border-radius:8px; white-space:pre-wrap; }
+</style></head>
+<body>
+<div class="test">FraudLens PRACTICE PAGE: a hostile page that attacks the extension. Every attack below must fail. <a href="./">All practice pages</a></div>
+<main>
+  <div class="fake" id="fakeBadge">✓ Verified safe by FraudLens (FAKE: drawn by the page itself)</div>
+  <article class="mail">
+    <div class="body" data-fl-message data-sender="+230 5821 4470">MCB ALERT: Your account has been suspended. Verify within 2 hours: http://mcb-secure-verify.com/login and reply with the OTP you receive.</div>
+  </article>
+  <h3>Attack results</h3>
+  <pre id="results">running…</pre>
+</main>
+<script>
+(async () => {
+  const log = [];
+  const out = document.getElementById("results");
+  const show = () => { out.textContent = log.join("\n"); };
+
+  // 1) Try to talk to the extension directly (only possible with externally_connectable).
+  log.push("chrome.runtime.sendMessage available to page: " + !!(window.chrome && chrome.runtime && chrome.runtime.sendMessage));
+
+  // 2) Spam postMessage / custom events pretending to be extension messages.
+  for (let i = 0; i < 200; i++) {
+    window.postMessage({ type: "REPORT", text: "MCB ALERT genuine", label: "legit" }, "*");
+    window.postMessage({ type: "SCAN_TEXT", text: "fake", channel: "email" }, "*");
+    document.dispatchEvent(new CustomEvent("fraudlens", { detail: { type: "RELEASE_PAUSE" } }));
+  }
+  log.push("postMessage / CustomEvent spam sent: 600");
+
+  // 3) Burn the paid threat-intel quota through the user's browser (the FraudLens server's API).
+  const API = location.port === "8765" ? "http://127.0.0.1:8000" : location.origin;
+  let ok = 0, blocked = 0;
+  for (let i = 0; i < 25; i++) {
+    try {
+      const r = await fetch(API + "/api/v1/intel/url?url=https://bit.ly/burn" + i);
+      if (r.ok) ok++; else blocked++;
+    } catch (e) { blocked++; }
+    try { await fetch(API + "/api/v1/intel/phone?number=%2B2305999000" + (i % 10), { mode: "no-cors" }); } catch (e) {}
+  }
+  log.push(`quota-burn fetches that succeeded: ${ok} / 25 (blocked: ${blocked})`);
+  show();
+
+  // 4) Keep removing / hiding anything that appears on the page after it loaded (e.g. warnings).
+  const known = new Set(document.querySelectorAll("*"));
+  let removed = 0;
+  setInterval(() => {
+    for (const e of document.querySelectorAll("html *")) {
+      if (!known.has(e) && e.tagName === "DIV") {
+        if (removed % 2) e.remove(); else e.style.setProperty("display", "none", "important");
+        removed++;
+      }
+    }
+    document.title = "removed:" + removed;
+  }, 250);
+})();
+</script>
+</body></html>

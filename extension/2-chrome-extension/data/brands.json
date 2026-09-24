@@ -1,0 +1,195 @@
+{
+ "_note": "Global brands scammers imitate most. Merged with the server's verified directory by the extension only (the backend scoring is unchanged). 'strict' brands need more than their name in an address (a 'login/verify' word or another phishing signal) before FraudLens warns, so normal sites that just mention them stay quiet.",
+ "organisations": [
+  {
+   "id": "netflix",
+   "name": "Netflix",
+   "strict": true,
+   "keywords": [
+    "netflix"
+   ],
+   "domains": [
+    "netflix.com",
+    "nflxext.com",
+    "nflximg.net",
+    "nflxvideo.net"
+   ]
+  },
+  {
+   "id": "google",
+   "name": "Google / Gmail",
+   "strict": true,
+   "keywords": [
+    "google",
+    "gmail"
+   ],
+   "domains": [
+    "google.com",
+    "google.mu",
+    "gmail.com",
+    "youtube.com",
+    "googleapis.com",
+    "gstatic.com",
+    "googleusercontent.com",
+    "withgoogle.com",
+    "goo.gl",
+    "g.co",
+    "googleadservices.com",
+    "googlevideo.com"
+   ]
+  },
+  {
+   "id": "microsoft",
+   "name": "Microsoft / Outlook",
+   "strict": true,
+   "keywords": [
+    "microsoft",
+    "outlook",
+    "office365",
+    "hotmail",
+    "onedrive",
+    "sharepoint"
+   ],
+   "domains": [
+    "microsoft.com",
+    "live.com",
+    "outlook.com",
+    "office.com",
+    "microsoftonline.com",
+    "office365.com",
+    "microsoft365.com",
+    "xbox.com",
+    "skype.com",
+    "azure.com",
+    "windows.com",
+    "bing.com",
+    "sharepoint.com",
+    "onedrive.com",
+    "msn.com"
+   ]
+  },
+  {
+   "id": "apple",
+   "name": "Apple / iCloud",
+   "strict": true,
+   "keywords": [
+    "icloud",
+    "appleid"
+   ],
+   "domains": [
+    "apple.com",
+    "icloud.com",
+    "apple.news",
+    "mzstatic.com"
+   ]
+  },
+  {
+   "id": "amazon",
+   "name": "Amazon",
+   "strict": true,
+   "keywords": [
+    "amazon"
+   ],
+   "domains": [
+    "amazon.com",
+    "amazon.co.uk",
+    "amazon.fr",
+    "amazon.de",
+    "amazon.in",
+    "amazon.ae",
+    "amazonaws.com",
+    "amzn.to",
+    "primevideo.com",
+    "media-amazon.com"
+   ]
+  },
+  {
+   "id": "facebook",
+   "name": "Facebook",
+   "strict": true,
+   "keywords": [
+    "facebook"
+   ],
+   "domains": [
+    "facebook.com",
+    "fb.com",
+    "fbcdn.net",
+    "meta.com",
+    "messenger.com"
+   ]
+  },
+  {
+   "id": "instagram",
+   "name": "Instagram",
+   "strict": true,
+   "keywords": [
+    "instagram"
+   ],
+   "domains": [
+    "instagram.com",
+    "cdninstagram.com"
+   ]
+  },
+  {
+   "id": "whatsapp",
+   "name": "WhatsApp",
+   "strict": true,
+   "keywords": [
+    "whatsapp"
+   ],
+   "domains": [
+    "whatsapp.com",
+    "whatsapp.net",
+    "wa.me"
+   ]
+  },
+  {
+   "id": "github",
+   "name": "GitHub",
+   "strict": true,
+   "keywords": [
+    "github"
+   ],
+   "domains": [
+    "github.com",
+    "githubusercontent.com",
+    "githubassets.com"
+   ]
+  },
+  {
+   "id": "linkedin",
+   "name": "LinkedIn",
+   "strict": true,
+   "keywords": [
+    "linkedin"
+   ],
+   "domains": [
+    "linkedin.com",
+    "lnkd.in",
+    "licdn.com"
+   ]
+  },
+  {
+   "id": "binance",
+   "name": "Binance",
+   "strict": true,
+   "keywords": [
+    "binance"
+   ],
+   "domains": [
+    "binance.com"
+   ]
+  },
+  {
+   "id": "coinbase",
+   "name": "Coinbase",
+   "strict": true,
+   "keywords": [
+    "coinbase"
+   ],
+   "domains": [
+    "coinbase.com"
+   ]
+  }
+ ]
+}

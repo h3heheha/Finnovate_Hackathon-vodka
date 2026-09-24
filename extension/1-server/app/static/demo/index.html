@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>FraudLens practice pages</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+ body { font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; background:#f3f5f8; color:#1b1b1b; margin:0; }
+ .test { background:#fff3cd; color:#5c4400; padding:8px 16px; font-size:14px; }
+ main { max-width: 760px; margin: 24px auto; padding: 0 20px; }
+ .card { background:#fff; border-radius:12px; padding:16px 18px; margin:14px 0; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+ h2 { margin: 0 0 6px; font-size: 18px; }
+ a { color:#0b57d0; font-weight:600; }
+ .how { color:#444; font-size:15px; }
+ code { background:#eceff3; padding:1px 6px; border-radius:5px; }
+</style></head>
+<body>
+<div class="test">FraudLens PRACTICE PAGES: made-up examples for trying the Chrome extension. Nothing here is real and nothing is sent anywhere.</div>
+<main>
+<h1>Try FraudLens</h1>
+<p class="how">First connect the extension to this server (click the FraudLens icon, paste this server's address, click <b>Connect</b>).
+Then open the pages below.</p>
+
+<div class="card"><h2>1. Scam inbox</h2>
+<p class="how">Six scams and two genuine messages. Scams get a red <b>Likely scam</b> banner; the genuine ones stay quiet.
+Click <b>See why</b> for the Scam X-Ray. Click a link inside a scam: FraudLens checks it before it opens.</p>
+<a href="inbox.html">Open the scam inbox →</a></div>
+
+<div class="card"><h2>2. Fake bank page + Pause-Before-Pay</h2>
+<p class="how">This page pretends to be at <code>mcb-secure-verify.com</code>. You get a look-alike warning, and when you click into
+<b>Password</b> or <b>Card number</b>, FraudLens pauses the page with a countdown.</p>
+<a href="login.html#as=mcb-secure-verify.com">Open the fake bank page →</a></div>
+
+<div class="card"><h2>3. Look-alike addresses</h2>
+<p class="how">Each link opens the same practice page pretending to be at a different address:</p>
+<ul>
+ <li><a href="login.html#as=rncb.mu">rncb.mu</a> ("rn" looks like "m": one letter away from mcb.mu)</li>
+ <li><a href="login.html#as=netflix-account-billing.com">netflix-account-billing.com</a> (mentions Netflix but isn't netflix.com)</li>
+ <li><a href="login.html#as=paypal-login.xyz">paypal-login.xyz</a> (brand + "login" on a cheap domain)</li>
+ <li><a href="login.html#as=news.example.org">news.example.org</a> (a normal site: <b>no</b> warning)</li>
+</ul>
+<p class="how">On real websites this works with <b>Protect every site</b> switched on in the extension's Settings.</p></div>
+
+<div class="card"><h2>4. Attack page</h2>
+<p class="how">A hostile page that tries to abuse the extension: spam it with fake messages, burn the server's lookups,
+draw a fake "verified safe" badge and delete FraudLens warnings. Every attack must fail.</p>
+<a href="attacks.html">Open the attack page →</a></div>
+</main>
+</body></html>

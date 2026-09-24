@@ -1,0 +1,42 @@
+[
+  {
+    "id": "q1",
+    "message": "MCB: Your card has been blocked. Call 5821 4470 now and give the agent your card PIN to unblock it.",
+    "question": "What is the biggest red flag?",
+    "options": ["The bank's name is mentioned", "It asks for your PIN", "It mentions your card"],
+    "answer": 1,
+    "explanation": "No bank ever asks for your PIN, by message or by phone. The number given is the scammer's, not the bank's."
+  },
+  {
+    "id": "q2",
+    "message": "Hi Dad, new number! Lost my phone. Can you send Rs 12,000 to this account? Need it today, will explain later.",
+    "question": "What should you do first?",
+    "options": ["Send the money, it's urgent", "Reply asking for the account name", "Call your child on their old number"],
+    "answer": 2,
+    "explanation": "Call the number you already have. If they really lost their phone, a friend or family member can confirm it."
+  },
+  {
+    "id": "q3",
+    "message": "Invest Rs 10,000 today and receive Rs 40,000 in 7 days. 100% guaranteed, licensed trader.",
+    "question": "Why is this suspicious?",
+    "options": ["Guaranteed high returns with no risk", "The amount is in rupees", "It mentions 7 days"],
+    "answer": 0,
+    "explanation": "Real investments always carry risk. Check any company with the FSC before investing."
+  },
+  {
+    "id": "q4",
+    "message": "Your parcel is waiting. Pay Rs 75 at https://bit.ly/parcel-mu to reschedule delivery.",
+    "question": "The amount is tiny. Is it safe to pay?",
+    "options": ["Yes, it's only Rs 75", "No, the goal is to steal your card details", "Only if you're expecting a parcel"],
+    "answer": 1,
+    "explanation": "The small fee is bait. The page collects your card number and OTP, which lets scammers take much more."
+  },
+  {
+    "id": "q5",
+    "message": "MCB: Your OTP for the payment of Rs 850 at Winners is 553201. Never share this code with anyone.",
+    "question": "Is this message a scam?",
+    "options": ["Yes, it contains an OTP", "Probably not, if you just made this payment", "Yes, it mentions a store"],
+    "answer": 1,
+    "explanation": "Genuine OTP messages tell you NOT to share the code and match a payment you just made. It only becomes risky if you didn't make that payment, or if someone asks you for the code."
+  }
+]

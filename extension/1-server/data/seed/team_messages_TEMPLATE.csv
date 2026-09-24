@@ -1,0 +1,3 @@
+text,label,lang,category
+"Paste a REAL message you received here (remove names/numbers if you like)",legit,en,none
+"Another real message, e.g. a scam SMS someone in the team got",scam,en,parcel_fee

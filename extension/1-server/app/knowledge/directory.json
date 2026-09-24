@@ -1,0 +1,155 @@
+{
+  "_note": "Verified contact directory used for lookalike-domain detection and 'contact the official channel' advice. BEFORE THE DEMO: confirm every domain and fill in the official phone numbers from each organisation's website. Never take a number from a suspicious message.",
+  "organisations": [
+    {
+      "id": "mcb",
+      "name": "MCB (Mauritius Commercial Bank)",
+      "type": "bank",
+      "keywords": [
+        "mcb",
+        "mcbjuice",
+        "juice"
+      ],
+      "domains": [
+        "mcb.mu"
+      ],
+      "website": "https://www.mcb.mu",
+      "phone": null
+    },
+    {
+      "id": "sbm",
+      "name": "SBM Bank",
+      "type": "bank",
+      "keywords": [
+        "sbm",
+        "sbmgroup"
+      ],
+      "domains": [
+        "sbmgroup.mu"
+      ],
+      "website": "https://www.sbmgroup.mu",
+      "phone": null
+    },
+    {
+      "id": "absa",
+      "name": "Absa Bank (Mauritius)",
+      "type": "bank",
+      "keywords": [
+        "absa"
+      ],
+      "domains": [
+        "absa.mu"
+      ],
+      "website": "https://www.absa.mu",
+      "phone": null
+    },
+    {
+      "id": "maubank",
+      "name": "MauBank",
+      "type": "bank",
+      "keywords": [
+        "maubank"
+      ],
+      "domains": [
+        "maubank.mu"
+      ],
+      "website": "https://www.maubank.mu",
+      "phone": null
+    },
+    {
+      "id": "bom",
+      "name": "Bank of Mauritius",
+      "type": "regulator",
+      "keywords": [
+        "bank of mauritius",
+        "banque de maurice",
+        "bankofmauritius"
+      ],
+      "domains": [
+        "bom.mu"
+      ],
+      "website": "https://www.bom.mu",
+      "phone": null
+    },
+    {
+      "id": "fsc",
+      "name": "Financial Services Commission",
+      "type": "regulator",
+      "keywords": [
+        "financial services commission",
+        "fscmauritius"
+      ],
+      "domains": [
+        "fscmauritius.org"
+      ],
+      "website": "https://www.fscmauritius.org",
+      "phone": null
+    },
+    {
+      "id": "mra",
+      "name": "Mauritius Revenue Authority",
+      "type": "government",
+      "keywords": [
+        "mra",
+        "mauritius revenue authority"
+      ],
+      "domains": [
+        "mra.mu"
+      ],
+      "website": "https://www.mra.mu",
+      "phone": null
+    },
+    {
+      "id": "mupost",
+      "name": "Mauritius Post",
+      "type": "courier",
+      "keywords": [
+        "mauritius post",
+        "mauritiuspost",
+        "mupost",
+        "la poste"
+      ],
+      "domains": [
+        "mauritiuspost.mu"
+      ],
+      "website": "https://www.mauritiuspost.mu",
+      "phone": null
+    },
+    {
+      "id": "dhl",
+      "name": "DHL",
+      "type": "courier",
+      "keywords": [
+        "dhl"
+      ],
+      "domains": [
+        "dhl.com"
+      ],
+      "website": "https://www.dhl.com",
+      "phone": null
+    },
+    {
+      "id": "paypal",
+      "name": "PayPal",
+      "type": "payments",
+      "keywords": [
+        "paypal"
+      ],
+      "domains": [
+        "paypal.com"
+      ],
+      "website": "https://www.paypal.com",
+      "phone": null
+    }
+  ],
+  "reporting": [
+    {
+      "id": "maucors",
+      "name": "MAUCORS (Mauritian Cybercrime Online Reporting System)",
+      "website": "https://maucors.govmu.org",
+      "description": "Report online scams and fraud attempts."
+    }
+  ],
+  "never_flag_numbers": [],
+  "_note_never_flag": "Official numbers that must never be flagged as scams (bank hotlines, police, CERT-MU). Copy them from each organisation's official website, never from a message. Numbers in each organisation's \"phone\" field are protected too."
+}

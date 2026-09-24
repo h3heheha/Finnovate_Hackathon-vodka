@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FraudLens</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <header>
+    <img src="../icons/icon32.png" alt="" width="24" height="24">
+    <div>
+      <div class="name">FraudLens</div>
+      <div class="tag">Spot the warning signs before you pay</div>
+    </div>
+    <div class="status"><span id="connText">…</span><span id="conn" class="conn" title="Server connection"></span></div>
+  </header>
+
+  <main>
+    <section id="connectCard" class="box connect" hidden>
+      <h2>Connect FraudLens to its server</h2>
+      <ol>
+        <li>Open your FraudLens server on Render and copy its address (it looks like <code>https://fraudlens-xxxx.onrender.com</code>).</li>
+        <li>Paste it below and click <b>Connect</b>, then <b>Allow</b>.</li>
+      </ol>
+      <input id="connectInput" type="text" spellcheck="false" autocomplete="off" placeholder="https://fraudlens-xxxx.onrender.com">
+      <button id="connectBtn" class="primary">Connect</button>
+      <div id="connectOut" class="out"></div>
+    </section>
+
+    <section id="result" aria-live="polite">
+      <div class="empty">
+        <p><strong>Nothing checked on this page yet.</strong></p>
+      </div>
+    </section>
+
+    <nav id="history" class="history" hidden></nav>
+
+    <section class="box">
+      <label for="paste" class="h">Check a message</label>
+      <textarea id="paste" rows="4" maxlength="5000" placeholder="Paste an SMS, WhatsApp or email message…"></textarea>
+      <button id="checkBtn" class="primary">Check</button>
+    </section>
+
+    <details class="box" id="settings">
+      <summary class="h">Settings &amp; privacy</summary>
+      <label for="apiBase">FraudLens server</label>
+      <input id="apiBase" type="text" spellcheck="false" autocomplete="off" placeholder="https://fraudlens-xxxx.onrender.com">
+      <div class="row">
+        <button id="saveApi" class="primary">Connect</button>
+        <button id="testBtn">Test connection</button>
+        <button id="practiceBtn">Practice pages</button>
+      </div>
+      <div id="testOut" class="out"></div>
+
+      <label class="site" for="keepAwake"><input type="checkbox" id="keepAwake">
+        <span>Keep the free server awake while Chrome is open (one tiny visit every 10 minutes)</span></label>
+
+      <div class="h2">Which services work on the server</div>
+      <button id="servicesBtn">Check services</button>
+      <div id="services"></div>
+
+      <div class="h2">Where FraudLens checks automatically</div>
+      <div class="site fixed">✓ <span>The practice pages on your FraudLens server</span></div>
+      <div id="sites"></div>
+      <div class="hint">Reload open tabs after switching a site on.</div>
+
+      <div class="h2">Privacy</div>
+      <ul class="hint">
+        <li>Messages are checked on this computer first. Only suspicious ones (a link, a number, money or pressure words) go to your FraudLens server.</li>
+        <li>The server removes card, account, phone, OTP, NIC and email details before any AI sees the text.</li>
+        <li>Website addresses are checked on this computer. Only addresses that look like a scam (a fake bank or brand name, free hosting, a raw IP address, "login/verify" words) are sent to the security databases, without the part after "?".</li>
+        <li>Pause-Before-Pay only notices that you clicked into a field on a page FraudLens flagged. It never reads what you type. Continuing is only possible from this panel, which a web page can't fake.</li>
+        <li>No API keys are stored in this extension. Results are kept in memory and cleared when Chrome closes.</li>
+      </ul>
+      <div id="install" class="hint"></div>
+    </details>
+  </main>
+  <script src="../lib/api.js"></script>
+  <script src="connect.js"></script>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+.env
+*.env
+.venv*
+__pycache__
+*.pyc
+.pytest_cache
+data/runtime
+data/cache
+models/multilingual-e5-small/onnx
+models/multilingual-e5-small/tokenizer.json
+models/phishing-url-detection/model.onnx
+*.pem

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Welcome to FraudLens</title>
+  <link rel="stylesheet" href="sidepanel.css">
+  <link rel="stylesheet" href="welcome.css">
+</head>
+<body>
+  <header>
+    <img src="../icons/icon48.png" alt="" width="32" height="32">
+    <div>
+      <div class="name">Welcome to FraudLens</div>
+      <div class="tag">Three steps, about one minute</div>
+    </div>
+  </header>
+  <main class="welcome">
+    <section class="box">
+      <h2>1. Pin FraudLens to the toolbar</h2>
+      <p>Click the puzzle-piece icon 🧩 at the top right of Chrome, then the pin 📌 next to <b>FraudLens Guard</b>.
+        Clicking the FraudLens icon opens its panel.</p>
+    </section>
+
+    <section class="box connect">
+      <h2>2. Connect to your FraudLens server</h2>
+      <p>Paste the address of your server on Render (it looks like <code>https://fraudlens-xxxx.onrender.com</code>) and click <b>Connect</b>.
+        Chrome then asks to let FraudLens talk to that address: click <b>Allow</b>.</p>
+      <input id="connectInput" type="text" spellcheck="false" autocomplete="off" placeholder="https://fraudlens-xxxx.onrender.com">
+      <button id="connectBtn" class="primary">Connect</button>
+      <div id="connectOut" class="out"></div>
+      <div id="services"></div>
+    </section>
+
+    <section class="box">
+      <h2>3. Try it</h2>
+      <p>Open the practice pages: a scam inbox, a fake bank page with Pause-Before-Pay, and an attack page.</p>
+      <button id="practiceBtn" disabled>Open the practice pages</button>
+      <p class="hint">Later, to protect Gmail, Outlook, WhatsApp Web or every website: FraudLens panel → Settings &amp; privacy.</p>
+    </section>
+  </main>
+  <script src="../lib/api.js"></script>
+  <script src="connect.js"></script>
+  <script src="welcome.js"></script>
+</body>
+</html>

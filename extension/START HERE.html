@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FraudLens V2 setup</title>
+<style>
+  :root {
+    --bg: #f5f6f8; --card: #ffffff; --ink: #1b1d21; --muted: #5d6470; --line: #e2e5ea;
+    --accent: #1e4fd8; --accent-soft: #e8eefc; --good: #2e7d32; --warn: #b54708; --warn-soft: #fff4e5; --bad: #c62828;
+    --code: #eef0f4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161a; --card: #1d2025; --ink: #eceff3; --muted: #a4abb6; --line: #2f343b;
+      --accent: #7aa2ff; --accent-soft: #1f2a44; --good: #66bb6a; --warn: #ffb74d; --warn-soft: #3a2a12; --bad: #ef5350;
+      --code: #262a31;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 860px; margin: 0 auto; padding: 28px 16px 60px; }
+  h1 { font-size: 30px; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 22px; }
+  h2 { font-size: 21px; margin: 0 0 10px; display: flex; gap: 10px; align-items: baseline; }
+  h2 .n { background: var(--accent); color: #fff; border-radius: 999px; min-width: 30px; height: 30px; display: inline-flex;
+    align-items: center; justify-content: center; font-size: 15px; flex: none; }
+  h2 .t { color: var(--muted); font-size: 14px; font-weight: 500; margin-left: auto; }
+  h3 { font-size: 16px; margin: 16px 0 6px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; margin: 16px 0; }
+  ol, ul { padding-left: 22px; margin: 6px 0; }
+  li { margin: 5px 0; }
+  code, kbd { background: var(--code); border-radius: 5px; padding: 1px 6px; font-size: 14px; font-family: ui-monospace, Consolas, monospace; }
+  .note { background: var(--accent-soft); border-radius: 10px; padding: 10px 14px; margin: 10px 0; }
+  .warn { background: var(--warn-soft); border-left: 4px solid var(--warn); border-radius: 8px; padding: 10px 14px; margin: 10px 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 15px; margin: 8px 0; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: .03em; }
+  .ok { color: var(--good); font-weight: 700; }
+  .no { color: var(--bad); font-weight: 700; }
+  a { color: var(--accent); }
+  .tree { font-family: ui-monospace, Consolas, monospace; font-size: 14px; background: var(--code); border-radius: 10px; padding: 12px 14px; white-space: pre; overflow-x: auto; }
+  .tablewrap { overflow-x: auto; }
+  details { border-top: 1px solid var(--line); padding: 8px 0; }
+  summary { cursor: pointer; font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <h1>FraudLens V2: set-up guide</h1>
+  <p class="sub">Free cloud server on Render + the Chrome extension. About 30 minutes the first time, most of it waiting.</p>
+
+  <section>
+    <h2>What is in this folder</h2>
+    <div class="tree">EXTENSION V2
+├── START HERE.html          ← this guide
+├── MY_KEYS.txt              ← your API keys (never upload this file)
+├── 1-server                 ← goes to GitHub, then Render builds and runs it
+├── 2-chrome-extension       ← load this folder into Chrome
+└── 3-backup-and-tests       ← Plan B (server on this laptop) and automatic tests</div>
+    <p>The extension holds no keys. Every key stays on the server, and the extension talks only to your server.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">1</span> Keys: the free APIs <span class="t">10 min, optional but recommended</span></h2>
+    <p>FraudLens works without any key (rules, our own AI models, OpenPhish, domain age, the phone check). Keys add more security databases and AI explanations.
+      Open <code>MY_KEYS.txt</code> in Notepad: your Safe Browsing, URLhaus and Telesign keys are already in it.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Service</th><th>What it adds</th><th>Free?</th><th>Status</th></tr>
+      <tr><td>OpenPhish</td><td>live list of phishing links</td><td>free, no key</td><td class="ok">built in</td></tr>
+      <tr><td>Google Safe Browsing</td><td>Google's dangerous-site list</td><td>free key</td><td class="ok">already in MY_KEYS</td></tr>
+      <tr><td>URLhaus (abuse.ch)</td><td>malware links</td><td>free key</td><td class="ok">already in MY_KEYS</td></tr>
+      <tr><td><b>VirusTotal</b> (new)</td><td>70+ security vendors check the link</td><td>free: 4/min, 500/day</td><td>add it (below)</td></tr>
+      <tr><td><b>Groq</b> (new)</td><td>AI writes the plain-language explanation</td><td>free: about 1,000 a day, no card</td><td>add it (below)</td></tr>
+      <tr><td>Gemini</td><td>alternative to Groq</td><td>free tier (Google may use the data)</td><td>optional</td></tr>
+      <tr><td>Telesign</td><td>phone risk score</td><td class="no">trial only</td><td>stops when the trial credits run out</td></tr>
+      <tr><td>Anthropic (Claude)</td><td>AI explanations</td><td class="no">paid</td><td>replaced by Groq</td></tr>
+    </table></div>
+    <h3>Get the two new free keys</h3>
+    <ol>
+      <li><b>Groq:</b> <a href="https://console.groq.com/keys" target="_blank" rel="noopener">console.groq.com/keys</a> → sign in with Google → <b>Create API Key</b> → copy it (it starts with <code>gsk_</code>) → paste after <code>FRAUDLENS_GROQ_API_KEY=</code> in MY_KEYS.txt.</li>
+      <li><b>VirusTotal:</b> <a href="https://www.virustotal.com/gui/join-us" target="_blank" rel="noopener">virustotal.com/gui/join-us</a> → sign up and confirm the email → click your name (top right) → <b>API key</b> → copy → paste after <code>FRAUDLENS_VIRUSTOTAL_KEY=</code>.</li>
+    </ol>
+    <div class="warn"><b>Replace the old keys.</b> Your Safe Browsing, URLhaus and Telesign keys were inside the old <code>fraudlens.zip</code> on Google Drive. Make new ones (Google Cloud Console → Credentials, <a href="https://auth.abuse.ch/" target="_blank" rel="noopener">auth.abuse.ch</a>, Telesign portal), delete the old ones, and update MY_KEYS.txt.</div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span> Put the server on GitHub <span class="t">5 min</span></h2>
+    <ol>
+      <li>Sign in at <a href="https://github.com" target="_blank" rel="noopener">github.com</a> (create a free account if you have none).</li>
+      <li>Click <b>+</b> (top right) → <b>New repository</b>. Name: <code>fraudlens-server</code>. Choose <b>Private</b>. Don't tick "Add a README". Click <b>Create repository</b>.</li>
+      <li>On the new, empty page click the link <b>uploading an existing file</b>.</li>
+      <li>In Windows, open <code>EXTENSION V2\1-server</code>, press <kbd>Ctrl</kbd>+<kbd>A</kbd> to select <b>everything inside it</b>, and drag it onto the GitHub page. Wait until all files are listed (about 94).</li>
+      <li>Click <b>Commit changes</b>.</li>
+    </ol>
+    <div class="note"><b>Check:</b> the repository's main page must show <code>Dockerfile</code>, <code>render.yaml</code> and the folders <code>app</code>, <code>models</code>… directly, not inside a <code>1-server</code> folder.
+      Never upload <code>MY_KEYS.txt</code> or the whole EXTENSION V2 folder.</div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span> Start the free server on Render <span class="t">10–15 min, mostly waiting</span></h2>
+    <ol>
+      <li>Go to <a href="https://dashboard.render.com/register" target="_blank" rel="noopener">render.com</a> → <b>Sign up with GitHub</b> (no credit card needed).</li>
+      <li>Click <b>New +</b> → <b>Blueprint</b>. Connect your GitHub account when asked, and give Render access to <code>fraudlens-server</code>.</li>
+      <li>Choose <code>fraudlens-server</code>. Render reads <code>render.yaml</code> and shows one free web service called <b>fraudlens</b>.</li>
+      <li>It asks for the keys: for each one, copy the value from MY_KEYS.txt. Leave the ones you don't have empty (if Render insists on a value, type <code>none</code>).</li>
+      <li>Click <b>Deploy Blueprint</b> (or <b>Apply</b>). Open the <b>fraudlens</b> service and wait until it says <b>Live</b>. The first build downloads the AI model and takes 5–10 minutes.</li>
+      <li>At the top of the service page, copy its address, e.g. <code>https://fraudlens-abcd.onrender.com</code>. Open it: you should see <b>"The server is running."</b></li>
+    </ol>
+    <details><summary>If "Blueprint" doesn't work: create the service by hand</summary>
+      <ol>
+        <li><b>New +</b> → <b>Web Service</b> → choose <code>fraudlens-server</code>.</li>
+        <li>Name <code>fraudlens</code> · Region <b>Frankfurt</b> · Language <b>Docker</b> (detected) · Instance type <b>Free</b>.</li>
+        <li><b>Environment Variables</b>: add <code>FRAUDLENS_REQUIRE_INSTALL_TOKEN</code> = <code>true</code>, <code>FRAUDLENS_REPORT_CONFIRMATIONS</code> = <code>1</code>, plus each key from MY_KEYS.txt (same names).</li>
+        <li><b>Advanced</b> → Health Check Path <code>/health</code> → <b>Create Web Service</b>.</li>
+      </ol>
+    </details>
+  </section>
+
+  <section>
+    <h2><span class="n">4</span> Install the Chrome extension <span class="t">2 min</span></h2>
+    <ol>
+      <li>Open <code>chrome://extensions</code>. If the <b>old FraudLens Guard</b> is there, click <b>Remove</b> (both use the same ID).</li>
+      <li>Switch on <b>Developer mode</b> (top right) → <b>Load unpacked</b> → choose <code>EXTENSION V2\2-chrome-extension</code>.</li>
+      <li>A <b>Welcome to FraudLens</b> tab opens. Paste your Render address → <b>Connect</b> → click <b>Allow</b> when Chrome asks.
+        After a few seconds (up to a minute if the server was asleep) you see <span class="ok">✓ Connected</span> and a list of services with ✓ / ✗ / –.</li>
+      <li>Pin the extension: puzzle icon 🧩 → pin 📌 next to FraudLens Guard.</li>
+    </ol>
+    <div class="note">A ✗ next to a service means its key is wrong or used up. Fix it in Render → your service → <b>Environment</b>, then click <b>Save changes</b> (Render restarts the server by itself, about 3 minutes). Then check again: FraudLens panel → Settings & privacy → <b>Check services</b>.</div>
+  </section>
+
+  <section>
+    <h2><span class="n">5</span> Try it <span class="t">5 min</span></h2>
+    <p>Click <b>Open the practice pages</b> on the welcome tab, or FraudLens panel → Settings & privacy → <b>Practice pages</b>.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Do this</th><th>You should see</th></tr>
+      <tr><td>Open <b>Scam inbox</b></td><td>6 scams get a red <b>Likely scam</b> banner; the genuine OTP and the dinner message don't. The toolbar icon shows a red <b>!</b></td></tr>
+      <tr><td>Click <b>See why</b></td><td>The side panel opens on that message: score, Scam X-Ray, how the score was built, what to do</td></tr>
+      <tr><td>Click the link inside the first scam</td><td>FraudLens checks it before it opens. <b>Open anyway</b> opens the fake bank page</td></tr>
+      <tr><td>On the fake bank page, click into any field</td><td><b>Pause-Before-Pay</b>: a full-screen stop with a 10-second countdown. Continuing is only possible from the side panel</td></tr>
+      <tr><td>Look-alike links (rncb.mu, netflix-account-billing.com, paypal-login.xyz)</td><td>Red banner explaining the trick; <code>news.example.org</code> stays quiet</td></tr>
+      <tr><td><b>Attack page</b></td><td><code>succeeded: 0 / 25</code>; the badge still shows <b>!</b> after the page deletes the warning</td></tr>
+      <tr><td>Paste a scam into <b>Check a message</b>, click <b>Yes, it's a scam</b>, then check a reworded copy</td><td>The reworded copy is caught at once: "It matches a scam reported by a FraudLens user"</td></tr>
+    </table></div>
+    <p>Real use: Settings & privacy → tick <b>Gmail</b>, <b>Outlook</b>, <b>WhatsApp Web</b> or <b>Protect every site</b>, click <b>Allow</b>, then reload those tabs.</p>
+  </section>
+
+  <section>
+    <h2><span class="n">6</span> Presentation day</h2>
+    <ul>
+      <li>The free server <b>sleeps after 15 minutes</b> without visitors, and waking it takes about a minute. While Chrome is open with FraudLens, it visits the server every 10 minutes to keep it awake (Settings → "Keep the free server awake", on by default).</li>
+      <li><b>30 minutes before:</b> open Chrome, open the FraudLens panel, and check that the header says <b>Connected</b>. Open the practice pages once.</li>
+      <li>If the panel says <b>Waking up…</b>, wait: checks resume by themselves.</li>
+      <li>Keep the Wi-Fi password of the venue (or a phone hotspot) ready.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="n">7</span> Plan B: no internet or Render down</h2>
+    <ol>
+      <li><b>Try this once at home, with internet</b> (the first run installs packages, 3–5 minutes).</li>
+      <li>Double-click <code>3-backup-and-tests\RUN_SERVER_ON_THIS_PC.bat</code>. Wait for <code>Application startup complete</code>. Keep the window open, and don't click inside it.</li>
+      <li>FraudLens panel → Settings & privacy → server <code>127.0.0.1:8000</code> → <b>Connect</b>.</li>
+      <li>Practice pages: <code>http://127.0.0.1:8000/demo/</code>. The security databases and AI explanations need internet; the warning-sign rules, our own AI models and the phone check work offline.</li>
+      <li>Back to Render afterwards: paste the Render address again and click <b>Connect</b>.</li>
+    </ol>
+    <p><code>RUN_SERVER_TESTS.bat</code> runs the 89 automatic server tests (after the Plan B file has run once).</p>
+  </section>
+
+  <section>
+    <h2>If something goes wrong</h2>
+    <details open><summary>Render build fails</summary>
+      <p>Open the service → <b>Logs</b>. "Model download failed" means Hugging Face was busy: click <b>Manual Deploy → Deploy latest commit</b>. "Dockerfile not found" means the files were uploaded inside a folder: re-upload the <i>contents</i> of 1-server (step 2).</p></details>
+    <details><summary>"Can't reach the server" / "Couldn't verify"</summary>
+      <p>Open your Render address in a tab. If it loads slowly, the server was asleep: wait a minute, then click <b>Test connection</b> in the panel. Check that the address in Settings is exactly your Render address (https://…onrender.com). "Couldn't verify" never means safe.</p></details>
+    <details><summary>Connect says "Chrome wasn't allowed to talk to that server"</summary>
+      <p>Click Connect again and choose <b>Allow</b> in Chrome's pop-up.</p></details>
+    <details><summary>No banners on Gmail / WhatsApp</summary>
+      <p>Tick the site in Settings & privacy, click Allow, then reload the tab. Only suspicious messages (links, numbers, money or pressure words) are checked.</p></details>
+    <details><summary>A service shows ✗</summary>
+      <p>The text next to it says why (key rejected, quota used). Fix the key in Render → Environment → Save changes, wait for "Live", then click Check services again. Telesign ✗ usually means the trial credits are used up: that's fine, the offline phone check still works.</p></details>
+    <details><summary>"Load unpacked" error about the extension ID</summary>
+      <p>Remove the old FraudLens Guard first (step 4.1), then load 2-chrome-extension again.</p></details>
+    <details><summary>Plan B window closes or shows an error</summary>
+      <p>Install Python 3.12 from python.org (tick "Add python.exe to PATH"), delete <code>3-backup-and-tests\.venv</code>, and run the file again. If it still fails, copy the error text and send it to Claude.</p></details>
+  </section>
+</main>
+</body>
+</html>
