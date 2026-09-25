@@ -45,7 +45,6 @@ Every layer is optional. If the e5 model isn't downloaded, a built-in hashing em
 
 ## Team
 
-Each member writes their own line (edit this file on GitHub: ✏️ → *Commit changes*).
 
 | Member | GitHub | Role | Main contributions |
 |---|---|---|---|
