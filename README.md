@@ -49,9 +49,9 @@ Each member writes their own line (edit this file on GitHub: ✏️ → *Commit 
 
 | Member | GitHub | Role | Main contributions |
 |---|---|---|---|
-| _Name_ | @username | UI/UX design | _…_ |
-| _Name_ | @username | _…_ | _…_ |
-| _Name_ | @username | _…_ | _…_ |
+|Pushkar Jhaumal| h3heheha | UI/UX design | _…_ |
+|Paveesh Rajiah | paveeshrajiah-cmd | _…_ | _…_ |
+| Jayesh Dowlol | Gilgamesh1806 | _…_ | _…_ |
 | _Name_ | @username | _…_ | _…_ |
 
 ## Development history
