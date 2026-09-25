@@ -99,25 +99,6 @@ flet run src/main.py            # desktop window  (or: flet run --web src/main.p
 ```
 On a phone, use **the native FraudLens Android app in `shield/`** (Kotlin): the same features and design as this app, with Shield built in (see `shield/README.md`). The web version here stays as the laptop demo and backup.
 
-## The 24-hour data plan
-
-1. **Collect real messages (the whole team, about 1 hour).** Copy `backend/data/seed/team_messages_TEMPLATE.csv` to `backend/data/raw/team_messages.csv`. Add real scams and, just as important, **real genuine texts**: bank OTPs, delivery notices, family chats. The test set is drawn from these real messages, so this is what makes your accuracy numbers credible.
-2. **Public data.**
-   - The UCI SMS Spam Collection downloads automatically. If the download is blocked, put the `SMSSpamCollection` file in `data/raw/`.
-   - Optionally add the Mishra & Soni SMS phishing CSV in `data/raw/mishra_soni/`. Download it manually from Mendeley; the licence says to contact the authors.
-3. **Synthetic French/Kreol variants on the 4070 desktop:**
-   ```bash
-   ollama pull gemma3:12b
-   python -m scripts.generate_synthetic --per-seed 4      # writes data/raw/synthetic_gemma3_12b.csv
-   ```
-   Copy the CSV to the laptop's `backend/data/raw/` and **skim it by hand**. LLM Kreol can be odd.
-4. **Train and evaluate:**
-   ```bash
-   python -m scripts.build_dataset
-   python -m scripts.train          # prints rules-only vs classifier vs hybrid on held-out REAL messages
-   python -m scripts.evaluate       # same comparison through the live engine, for the slide
-   python -m scripts.export_demo_cache
-   ```
 
 ## The live-learning demo
 
