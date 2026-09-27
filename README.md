@@ -1,5 +1,6 @@
 # FraudLens AI: spot the warning signs before you pay
-
+ideas to improve
+-companion: can scans links without having to manually enter site
 > **Demo on your phone:** follow [`DEMO_PLAN.md`](DEMO_PLAN.md) step by step. **Security review:** [`SECURITY.md`](SECURITY.md).
 Finnovate AI Hackathon 2026, Challenge 5.
 
